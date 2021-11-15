@@ -1,0 +1,33 @@
+{
+    "name": "Nyoom",
+    "maps": [
+        {
+            "name": "Vroom",
+            "id": "8373dce1-1ae2-431c-b666-bf02714cde37",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Value",
+                    "id": "90a7786f-87b5-487c-81ea-65856d4d3d00",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5418dc2b-8669-4157-9d91-88b8b285cab5",
+                    "path": "<Gamepad>/rightStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

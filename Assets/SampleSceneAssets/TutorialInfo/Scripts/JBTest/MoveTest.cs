@@ -6,14 +6,22 @@ using UnityEngine.InputSystem;
 public class MoveTest : MonoBehaviour
 {
     public AccelerateInput aInput;
-    public Rigidbody rb;
+    private Rigidbody rb;
+    public AccelerateInput instance;
     public float speed = 20f;
 
-    
+
+    private void Awake() 
+    {
+        aInput = new AccelerateInput();
+        rb = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate() 
     {
         Vector2 moveInput = aInput.Accelerate.Move.ReadValue<Vector2>();
-        rb.velocity = moveInput * speed;
+        Debug.Log(moveInput);
+        //rb.velocity = moveInput * speed;
     }
 
 }

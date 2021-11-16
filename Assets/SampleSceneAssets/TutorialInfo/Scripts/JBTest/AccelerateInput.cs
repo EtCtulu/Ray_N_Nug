@@ -31,7 +31,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5418dc2b-8669-4157-9d91-88b8b285cab5"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

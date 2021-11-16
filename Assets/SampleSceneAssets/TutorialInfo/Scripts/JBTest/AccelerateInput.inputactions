@@ -1,12 +1,12 @@
 {
-    "name": "Nyoom",
+    "name": "AccelerateInput",
     "maps": [
         {
-            "name": "Vroom",
+            "name": "Accelerate",
             "id": "8373dce1-1ae2-431c-b666-bf02714cde37",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Move",
                     "type": "Value",
                     "id": "90a7786f-87b5-487c-81ea-65856d4d3d00",
                     "expectedControlType": "",
@@ -22,7 +22,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

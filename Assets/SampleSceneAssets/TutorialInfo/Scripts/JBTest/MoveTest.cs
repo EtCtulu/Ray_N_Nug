@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 
 public class MoveTest : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    public AccelerateInput aInput;
     public Rigidbody rb;
     public float speed = 20f;
+
+    
     void FixedUpdate() 
     {
-        Vector2 moveInput = playerInput.Player.Move.ReadValue<Vector2>();
+        Vector2 moveInput = aInput.Accelerate.Move.ReadValue<Vector2>();
         rb.velocity = moveInput * speed;
     }
 

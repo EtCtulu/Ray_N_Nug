@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/SampleSceneAssets/TutorialInfo/Scripts/JBTest/Nyoom.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/SampleSceneAssets/TutorialInfo/Scripts/JBTest/AccelerateInput.inputactions'
 
 using System;
 using System.Collections;
@@ -6,20 +6,20 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Nyoom : IInputActionCollection, IDisposable
+public class @AccelerateInput : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Nyoom()
+    public @AccelerateInput()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Nyoom"",
+    ""name"": ""AccelerateInput"",
     ""maps"": [
         {
-            ""name"": ""Vroom"",
+            ""name"": ""Accelerate"",
             ""id"": ""8373dce1-1ae2-431c-b666-bf02714cde37"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""90a7786f-87b5-487c-81ea-65856d4d3d00"",
                     ""expectedControlType"": """",
@@ -35,7 +35,7 @@ public class @Nyoom : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -44,9 +44,9 @@ public class @Nyoom : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Vroom
-        m_Vroom = asset.FindActionMap("Vroom", throwIfNotFound: true);
-        m_Vroom_Newaction = m_Vroom.FindAction("New action", throwIfNotFound: true);
+        // Accelerate
+        m_Accelerate = asset.FindActionMap("Accelerate", throwIfNotFound: true);
+        m_Accelerate_Move = m_Accelerate.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -93,40 +93,40 @@ public class @Nyoom : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Vroom
-    private readonly InputActionMap m_Vroom;
-    private IVroomActions m_VroomActionsCallbackInterface;
-    private readonly InputAction m_Vroom_Newaction;
-    public struct VroomActions
+    // Accelerate
+    private readonly InputActionMap m_Accelerate;
+    private IAccelerateActions m_AccelerateActionsCallbackInterface;
+    private readonly InputAction m_Accelerate_Move;
+    public struct AccelerateActions
     {
-        private @Nyoom m_Wrapper;
-        public VroomActions(@Nyoom wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Vroom_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_Vroom; }
+        private @AccelerateInput m_Wrapper;
+        public AccelerateActions(@AccelerateInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Accelerate_Move;
+        public InputActionMap Get() { return m_Wrapper.m_Accelerate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(VroomActions set) { return set.Get(); }
-        public void SetCallbacks(IVroomActions instance)
+        public static implicit operator InputActionMap(AccelerateActions set) { return set.Get(); }
+        public void SetCallbacks(IAccelerateActions instance)
         {
-            if (m_Wrapper.m_VroomActionsCallbackInterface != null)
+            if (m_Wrapper.m_AccelerateActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_VroomActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_VroomActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_VroomActionsCallbackInterface.OnNewaction;
+                @Move.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
             }
-            m_Wrapper.m_VroomActionsCallbackInterface = instance;
+            m_Wrapper.m_AccelerateActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
             }
         }
     }
-    public VroomActions @Vroom => new VroomActions(this);
-    public interface IVroomActions
+    public AccelerateActions @Accelerate => new AccelerateActions(this);
+    public interface IAccelerateActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }

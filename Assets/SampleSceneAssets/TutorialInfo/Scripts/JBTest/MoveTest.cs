@@ -12,10 +12,13 @@ public class MoveTest : MonoBehaviour
     public AccelerateInput instance;
 
     // Valeures pour le déplacement des personnages.
+
+    // Les inputs Normalisés
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
+
     [Header("Valeur de vitesse de côté")]
-    [Space(20)]
+    [Space(10)]
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
     

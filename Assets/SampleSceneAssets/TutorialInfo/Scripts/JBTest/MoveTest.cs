@@ -8,7 +8,7 @@ public class MoveTest : MonoBehaviour
 
     // Déclarations des variables utiles
     public AccelerateInput aInput;
-    private Rigidbody rb;
+    private Rigidbody rbCharacter;
     public AccelerateInput instance;
 
     // Valeures pour le déplacement des personnages.
@@ -27,7 +27,7 @@ public class MoveTest : MonoBehaviour
     private void Awake() 
     {
         aInput = new AccelerateInput();
-        rb = GetComponent<Rigidbody>();
+        rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
     }
 
 
@@ -36,7 +36,7 @@ public class MoveTest : MonoBehaviour
     {
         Vector2 rawMoveInput = context.ReadValue<Vector2>();
         Debug.Log(rawMoveInput);
-        rb.velocity = rawMoveInput * strafeSpeed;
+        rbCharacter.velocity = rawMoveInput * strafeSpeed;
         if (Mathf.Abs(rawMoveInput.x) > 0.5f)
         {
             NormInputX = (int)(rawMoveInput * Vector2.right).normalized.x;
@@ -55,7 +55,7 @@ public class MoveTest : MonoBehaviour
             NormInputY = 0;
         }
         Vector2 moveInput = new Vector2(NormInputX,NormInputY);
-        rb.velocity = moveInput * strafeSpeed;
+        rbCharacter.velocity = moveInput * strafeSpeed;
     }
 
 

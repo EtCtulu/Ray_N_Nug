@@ -17,9 +17,16 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Script utilisé pour déplacer le joueur sur l'axe Z, on y trouve sa vitesse.")]
     public CinemachineDollyCart playerParent;
 
+    [Header("Vitesse sur l'axe Z")]
+    [Space(10)]
+    [Tooltip("Vitesse sans boost")]
     public float trailSpeed = 20;
 
+    [Tooltip("Vitesse avec boost")]
     public float boostTrailSpeed = 50;
+
+    [Tooltip("Vitesse avec frein")]
+    public float slowTrailSpeed = 10;
 
     // Valeures pour le déplacement des personnages.
 

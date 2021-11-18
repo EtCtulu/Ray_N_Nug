@@ -30,8 +30,13 @@ public class MoveTest : MonoBehaviour
     public void Accelerate()
     {
         Vector2 moveInput = aInput.Accelerate.Move.ReadValue<Vector2>();
-        Debug.Log(rightStick);
+<<<<<<< HEAD
+        Debug.Log(moveInput);
         rb.velocity = moveInput * speed;
+=======
+        Debug.Log(rightStick);
+        //rb.velocity = moveInput * speed;
+>>>>>>> 5ab8c7ab0c8d7c3ba5996734636c5e1db4c40db5
     }
 
 }

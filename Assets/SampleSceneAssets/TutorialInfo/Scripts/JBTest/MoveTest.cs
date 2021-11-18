@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class MoveTest : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class MoveTest : MonoBehaviour
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
     public AccelerateInput instance;
+
+    [Header("Parent du character")]
+    [Space(10)]
+    [Tooltip("Script utilisé pour déplacer le joueur sur l'axe Z, on y trouve sa vitesse.")]
+    public CinemachineDollyCart playerParent;
+
+    public float trailSpeed = 20;
+
+    public float boostTrailSpeed = 50;
 
     // Valeures pour le déplacement des personnages.
 
@@ -63,6 +73,13 @@ public class MoveTest : MonoBehaviour
     public void Accelerate(InputAction.CallbackContext context)
     {
         Debug.Log("Ohlala on va vite");
+        if(context.performed)
+        {
+        playerParent.m_Speed = boostTrailSpeed;
+        }
+        else{
+            playerParent.m_Speed = trailSpeed;
+        }
     }
 
     // Fonction qui sert a baisser la vitesse sur l'axe Z

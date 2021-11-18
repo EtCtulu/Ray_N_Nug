@@ -10,17 +10,21 @@ public class MoveTest : MonoBehaviour
     public AccelerateInput instance;
     public float speed = 20f;
 
+    public Vector2 rightStick;
+
 
     private void Awake() 
     {
         aInput = new AccelerateInput();
         rb = GetComponent<Rigidbody>();
+        aInput.Accelerate.Move.performed += ctx => rightStick = ctx.ReadValue<Vector2>();
+        aInput.Accelerate.Move.canceled += ctx => rightStick = Vector2.zero;
     }
 
     void FixedUpdate() 
     {
         Vector2 moveInput = aInput.Accelerate.Move.ReadValue<Vector2>();
-        Debug.Log(moveInput);
+        Debug.Log(rightStick);
         //rb.velocity = moveInput * speed;
     }
 

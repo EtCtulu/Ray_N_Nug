@@ -649,7 +649,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 888866192}
         m_TargetAssemblyTypeName: MoveTest, Assembly-CSharp
-        m_MethodName: Accelerate
+        m_MethodName: Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -661,6 +661,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 90a7786f-87b5-487c-81ea-65856d4d3d00
     m_ActionName: Vroom/New action[/XInputControllerWindows/rightStick/y]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 888866192}
+        m_TargetAssemblyTypeName: MoveTest, Assembly-CSharp
+        m_MethodName: Accelerate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3a6ffc52-7889-4488-95cc-6617c529a384
+    m_ActionName: Accelerate/Accelerate[/XInputControllerWindows/rightStick/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 888866192}
+        m_TargetAssemblyTypeName: MoveTest, Assembly-CSharp
+        m_MethodName: SlowDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a68aafaa-4692-418b-a3a0-048bd7f7230a
+    m_ActionName: Accelerate/SlowDown[/XInputControllerWindows/rightStick/down]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Accelerate

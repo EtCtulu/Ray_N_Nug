@@ -27,11 +27,21 @@ public class MoveTest : MonoBehaviour
         
     }
 
-    public void Accelerate(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
         Vector2 moveInput = context.ReadValue<Vector2>();
         Debug.Log(rightStick);
         rb.velocity = moveInput * speed;
+    }
+
+    public void Accelerate(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ohlala on va vite");
+    }
+
+    public void SlowDown(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ohlala on ralentit");
     }
 
 }

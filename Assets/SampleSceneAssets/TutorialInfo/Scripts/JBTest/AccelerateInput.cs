@@ -25,6 +25,22 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Accelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a6ffc52-7889-4488-95cc-6617c529a384"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SlowDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""a68aafaa-4692-418b-a3a0-048bd7f7230a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -82,6 +98,28 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4f0e4a5-f435-43bf-89f2-89e9a83b78eb"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f6b2a64-5736-4832-b3ad-25911b9ec5ac"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -91,6 +129,8 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         // Accelerate
         m_Accelerate = asset.FindActionMap("Accelerate", throwIfNotFound: true);
         m_Accelerate_Move = m_Accelerate.FindAction("Move", throwIfNotFound: true);
+        m_Accelerate_Accelerate = m_Accelerate.FindAction("Accelerate", throwIfNotFound: true);
+        m_Accelerate_SlowDown = m_Accelerate.FindAction("SlowDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +181,15 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Accelerate;
     private IAccelerateActions m_AccelerateActionsCallbackInterface;
     private readonly InputAction m_Accelerate_Move;
+    private readonly InputAction m_Accelerate_Accelerate;
+    private readonly InputAction m_Accelerate_SlowDown;
     public struct AccelerateActions
     {
         private @AccelerateInput m_Wrapper;
         public AccelerateActions(@AccelerateInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Accelerate_Move;
+        public InputAction @Accelerate => m_Wrapper.m_Accelerate_Accelerate;
+        public InputAction @SlowDown => m_Wrapper.m_Accelerate_SlowDown;
         public InputActionMap Get() { return m_Wrapper.m_Accelerate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +202,12 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnMove;
+                @Accelerate.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnAccelerate;
+                @Accelerate.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnAccelerate;
+                @Accelerate.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnAccelerate;
+                @SlowDown.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
+                @SlowDown.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
+                @SlowDown.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
             }
             m_Wrapper.m_AccelerateActionsCallbackInterface = instance;
             if (instance != null)
@@ -165,6 +215,12 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Accelerate.started += instance.OnAccelerate;
+                @Accelerate.performed += instance.OnAccelerate;
+                @Accelerate.canceled += instance.OnAccelerate;
+                @SlowDown.started += instance.OnSlowDown;
+                @SlowDown.performed += instance.OnSlowDown;
+                @SlowDown.canceled += instance.OnSlowDown;
             }
         }
     }
@@ -172,5 +228,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
     public interface IAccelerateActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAccelerate(InputAction.CallbackContext context);
+        void OnSlowDown(InputAction.CallbackContext context);
     }
 }

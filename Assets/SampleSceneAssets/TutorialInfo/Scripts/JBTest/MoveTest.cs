@@ -5,20 +5,22 @@ using UnityEngine.InputSystem;
 
 public class MoveTest : MonoBehaviour
 {
+
+    // Déclarations des variables utiles
     public AccelerateInput aInput;
     private Rigidbody rb;
     public AccelerateInput instance;
-    public float speed = 20f;
 
-    public Vector2 rightStick;
+    // Valeures pour le déplacement des personnages.
+    public int NormInputX { get; private set; }
+    public int NormInputY { get; private set; }
+    public float strafeSpeed = 20f;
 
 
     private void Awake() 
     {
         aInput = new AccelerateInput();
         rb = GetComponent<Rigidbody>();
-        aInput.Accelerate.Move.performed += ctx => rightStick = ctx.ReadValue<Vector2>();
-        aInput.Accelerate.Move.canceled += ctx => rightStick = Vector2.zero;
     }
 
     void FixedUpdate() 
@@ -29,9 +31,28 @@ public class MoveTest : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
-        Debug.Log(rightStick);
-        rb.velocity = moveInput * speed;
+        Vector2 rawMoveInput = context.ReadValue<Vector2>();
+        Debug.Log(rawMoveInput);
+        rb.velocity = rawMoveInput * strafeSpeed;
+        if (Mathf.Abs(rawMoveInput.x) > 0.5f)
+        {
+            NormInputX = (int)(rawMoveInput * Vector2.right).normalized.x;
+        }
+        else
+        {
+            NormInputX = 0;
+        }
+
+        if (Mathf.Abs(rawMoveInput.y) > 0.5f)
+        {
+            NormInputY = (int)(rawMoveInput * Vector2.up).normalized.y;
+        }
+        else
+        {
+            NormInputY = 0;
+        }
+        Vector2 moveInput = new Vector2(NormInputX,NormInputY);
+        rb.velocity = moveInput * strafeSpeed;
     }
 
     public void Accelerate(InputAction.CallbackContext context)

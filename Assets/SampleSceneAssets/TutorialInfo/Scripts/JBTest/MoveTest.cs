@@ -14,7 +14,11 @@ public class MoveTest : MonoBehaviour
     // Valeures pour le déplacement des personnages.
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
+    [Header("Valeur de vitesse de côté")]
+    [Space(20)]
+    [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
+    
 
 
     private void Awake() 
@@ -23,12 +27,8 @@ public class MoveTest : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate() 
-    {
-        
-        
-    }
 
+    // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 rawMoveInput = context.ReadValue<Vector2>();
@@ -55,11 +55,14 @@ public class MoveTest : MonoBehaviour
         rb.velocity = moveInput * strafeSpeed;
     }
 
+
+    // Fonction qui sert a augmenter la vitesse sur l'axe Z
     public void Accelerate(InputAction.CallbackContext context)
     {
         Debug.Log("Ohlala on va vite");
     }
 
+    // Fonction qui sert a baisser la vitesse sur l'axe Z
     public void SlowDown(InputAction.CallbackContext context)
     {
         Debug.Log("Ohlala on ralentit");

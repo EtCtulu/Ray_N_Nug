@@ -27,9 +27,9 @@ public class MoveTest : MonoBehaviour
         
     }
 
-    public void Accelerate()
+    public void Accelerate(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = aInput.Accelerate.Move.ReadValue<Vector2>();
+        Vector2 moveInput = context.ReadValue<Vector2>();
         Debug.Log(rightStick);
         rb.velocity = moveInput * speed;
     }

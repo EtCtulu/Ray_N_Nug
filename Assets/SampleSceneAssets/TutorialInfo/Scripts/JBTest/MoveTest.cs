@@ -83,7 +83,8 @@ public class MoveTest : MonoBehaviour
         Debug.Log("Ohlala on va vite");
         if(context.performed)
         {
-            playerParent.m_Speed = boostTrailSpeed;
+            
+            playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
         }
         else{
             playerParent.m_Speed = trailSpeed;

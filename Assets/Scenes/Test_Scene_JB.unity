@@ -559,7 +559,7 @@ MonoBehaviour:
   trailSpeed: 20
   boostTrailSpeed: 50
   slowTrailSpeed: 10
-  strafeSpeed: 20
+  strafeSpeed: 10
 --- !u!114 &400385172
 MonoBehaviour:
   m_ObjectHideFlags: 0

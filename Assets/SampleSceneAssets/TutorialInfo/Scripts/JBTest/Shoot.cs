@@ -7,7 +7,7 @@ public class Shoot : MonoBehaviour
 {
 
     private GameObject ray;
-    private GameObject target;
+    public GameObject target;
 
     private void Awake() 
     {

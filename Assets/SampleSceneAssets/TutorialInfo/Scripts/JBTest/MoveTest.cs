@@ -10,6 +10,8 @@ public class MoveTest : MonoBehaviour
     // Déclarations des variables utiles
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
+
+    private Transform rbCharacterTransform;
     public AccelerateInput instance;
 
     [Header("Parent du character")]
@@ -38,6 +40,8 @@ public class MoveTest : MonoBehaviour
     [Space(10)]
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
+
+    private bool isMoving = false;
     
 
 
@@ -45,8 +49,19 @@ public class MoveTest : MonoBehaviour
     {
         aInput = new AccelerateInput();
         rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
+        rbCharacterTransform = rbCharacter.transform;
     }
 
+
+
+    private void LateUpdate() 
+    {
+        if(!isMoving)
+        {
+            Debug.Log("Stop Move");
+            rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.rotation, Quaternion.LookRotation(new Vector2(0,0), transform.up), Time.deltaTime * 4f);
+        }      
+    }
 
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
@@ -54,6 +69,7 @@ public class MoveTest : MonoBehaviour
         Vector2 rawMoveInput = context.ReadValue<Vector2>();
         //Debug.Log(rawMoveInput);
         rbCharacter.velocity = rawMoveInput * strafeSpeed;
+        isMoving = true;
         if (Mathf.Abs(rawMoveInput.x) > 0.1f)
         {
             NormInputX = (rawMoveInput * Vector2.right).x;
@@ -74,6 +90,13 @@ public class MoveTest : MonoBehaviour
         Vector2 moveInput = new Vector2(NormInputX,NormInputY);
         Debug.Log(moveInput);
         rbCharacter.velocity = moveInput * strafeSpeed;
+
+        rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.rotation, Quaternion.LookRotation(moveInput, transform.up), Time.deltaTime * 2f);
+
+        if (context.ReadValue<Vector2>() == new Vector2(0,0))
+        {
+            isMoving = false;
+        }
     }
 
 

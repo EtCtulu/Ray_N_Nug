@@ -41,6 +41,14 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""26e7f9ef-4162-428c-95df-bc14892c5e28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""action"": ""SlowDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44fb97eb-4ae4-4677-9827-36e92ff3a5b1"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +150,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         m_Accelerate_Move = m_Accelerate.FindAction("Move", throwIfNotFound: true);
         m_Accelerate_Accelerate = m_Accelerate.FindAction("Accelerate", throwIfNotFound: true);
         m_Accelerate_SlowDown = m_Accelerate.FindAction("SlowDown", throwIfNotFound: true);
+        m_Accelerate_Shoot = m_Accelerate.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +203,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Accelerate_Move;
     private readonly InputAction m_Accelerate_Accelerate;
     private readonly InputAction m_Accelerate_SlowDown;
+    private readonly InputAction m_Accelerate_Shoot;
     public struct AccelerateActions
     {
         private @AccelerateInput m_Wrapper;
@@ -190,6 +211,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Accelerate_Move;
         public InputAction @Accelerate => m_Wrapper.m_Accelerate_Accelerate;
         public InputAction @SlowDown => m_Wrapper.m_Accelerate_SlowDown;
+        public InputAction @Shoot => m_Wrapper.m_Accelerate_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Accelerate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +230,9 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @SlowDown.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnSlowDown;
+                @Shoot.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_AccelerateActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +246,9 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAccelerate(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

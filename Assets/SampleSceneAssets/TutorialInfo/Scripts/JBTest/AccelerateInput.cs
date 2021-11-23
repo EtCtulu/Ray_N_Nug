@@ -110,7 +110,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c4f0e4a5-f435-43bf-89f2-89e9a83b78eb"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -121,7 +121,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4f6b2a64-5736-4832-b3ad-25911b9ec5ac"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

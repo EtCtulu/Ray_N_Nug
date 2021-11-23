@@ -54,6 +54,10 @@ public class MoveTest : MonoBehaviour
     private bool isBoosting = false;
 
     private bool isSlowing = false;
+
+    private bool isStopping = false;
+
+    private bool isSpeeding = false;
     
 
 
@@ -79,6 +83,22 @@ public class MoveTest : MonoBehaviour
             {
                 isSlowing = false;
                 isBoosting = false;
+                time = 0;
+            }
+        }
+        if(isStopping)
+        {
+            time += Time.deltaTime * 4;
+            playerParent.m_Speed = Mathf.Lerp(trailSpeed, slowTrailSpeed, time);
+        }
+        if(isSpeeding)
+        {
+            time += Time.deltaTime * 2;
+            playerParent.m_Speed = Mathf.Lerp(slowTrailSpeed, trailSpeed, time);
+            if(time >= 1)
+            {
+                isStopping = false;
+                isSpeeding = false;
                 time = 0;
             }
         }
@@ -144,7 +164,6 @@ public class MoveTest : MonoBehaviour
         if(context.performed)
         {
             isBoosting = true;
-            // playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
         }
         else if(context.canceled)
         {
@@ -152,22 +171,27 @@ public class MoveTest : MonoBehaviour
             time = 0;
             isBoosting = false;
             isSlowing = true;            
-            playerParent.m_Speed = trailSpeed;
+            // playerParent.m_Speed = trailSpeed;
         }
     }
 
     // Fonction qui sert a baisser la vitesse sur l'axe Z
     public void SlowDown(InputAction.CallbackContext context)
     {
-        if(isBoosting)
+        if(!isBoosting)
         {
         if(context.performed)
         {
-            playerParent.m_Speed = slowTrailSpeed;
+            Debug.Log("Ohlala on va lentement");
+            isStopping = true;
+            // playerParent.m_Speed = slowTrailSpeed;
         }
         else if(context.canceled)
         {
-            playerParent.m_Speed = trailSpeed;
+            Debug.Log("ON EST PLUS LENT");
+            time = 0;
+            isStopping = false;
+            isSpeeding = true;
         }
         }
     }

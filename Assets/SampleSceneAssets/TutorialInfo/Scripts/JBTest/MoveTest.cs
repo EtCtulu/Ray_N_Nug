@@ -106,10 +106,10 @@ public class MoveTest : MonoBehaviour
         Debug.Log("Ohlala on va vite");
         if(context.performed)
         {
-            
-            playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
+           playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
         }
-        else{
+        else
+        {
             playerParent.m_Speed = trailSpeed;
         }
     }
@@ -117,7 +117,14 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a baisser la vitesse sur l'axe Z
     public void SlowDown(InputAction.CallbackContext context)
     {
-        Debug.Log("Ohlala on ralentit");
+        if(context.performed)
+        {
+            playerParent.m_Speed = slowTrailSpeed;
+        }
+        else
+        {
+            playerParent.m_Speed = trailSpeed;
+        }
     }
 
 }

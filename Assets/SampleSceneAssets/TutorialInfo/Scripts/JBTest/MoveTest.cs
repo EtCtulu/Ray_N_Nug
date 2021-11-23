@@ -36,6 +36,12 @@ public class MoveTest : MonoBehaviour
     public float NormInputX { get; private set; }
     public float NormInputY { get; private set; }
 
+    // Les inputs non normalisés
+
+    public float inputX { get; private set; }
+    public float inputY { get; private set; }
+
+
     [Header("Valeur de vitesse de côté")]
     [Space(10)]
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
@@ -72,26 +78,33 @@ public class MoveTest : MonoBehaviour
         isMoving = true;
         if (Mathf.Abs(rawMoveInput.x) > 0.1f)
         {
-            NormInputX = (rawMoveInput * Vector2.right).x;
+            inputX = (rawMoveInput * Vector2.right).x;
+            NormInputX = (rawMoveInput * Vector2.right).normalized.x;
         }
         else
         {
+            inputX = 0;
             NormInputX = 0;
         }
 
         if (Mathf.Abs(rawMoveInput.y) > 0.1f)
         {
-            NormInputY = (rawMoveInput * Vector2.up).y;
+            inputY = (rawMoveInput * Vector2.up).y;
+            NormInputY = (rawMoveInput * Vector2.up).normalized.y;
         }
         else
         {
-            NormInputY = 0;
+            inputY = 0;
+            NormInputX = 0;
         }
-        Vector2 moveInput = new Vector2(NormInputX,NormInputY);
+        Vector2 moveInput = new Vector2(inputX, inputY);
+
+        Vector3 vRotation = new Vector3(NormInputX, NormInputY, 0);
+        
         Debug.Log(moveInput);
         rbCharacter.velocity = moveInput * strafeSpeed;
 
-        rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.rotation, Quaternion.LookRotation(moveInput, transform.up), Time.deltaTime * 2f);
+        rbCharacterTransform.rotation = Quaternion.Slerp(Quaternion.LookRotation(new Vector2(0,0), transform.up), Quaternion.LookRotation(vRotation, transform.up), Time.deltaTime * 5f);
 
         if (context.ReadValue<Vector2>() == new Vector2(0,0))
         {

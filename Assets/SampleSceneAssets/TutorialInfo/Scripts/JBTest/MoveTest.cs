@@ -30,6 +30,8 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Vitesse avec frein")]
     public float slowTrailSpeed = 10;
 
+    private float time = 0;
+
     // Valeures pour le déplacement des personnages.
 
     // Les inputs Normalisés
@@ -48,6 +50,10 @@ public class MoveTest : MonoBehaviour
     public float strafeSpeed = 20f;
 
     private bool isMoving = false;
+
+    private bool isBoosting = false;
+
+    private bool isSlowing = false;
     
 
 
@@ -58,7 +64,25 @@ public class MoveTest : MonoBehaviour
         rbCharacterTransform = rbCharacter.transform;
     }
 
-
+    private void Update()
+    {
+        if(isBoosting)
+        {
+            time += Time.deltaTime;
+            playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, time);
+        }
+        if(isSlowing)
+        {
+            time += Time.deltaTime * 2;
+            playerParent.m_Speed = Mathf.Lerp(boostTrailSpeed, trailSpeed, time);
+            if(time >= 1)
+            {
+                isSlowing = false;
+                isBoosting = false;
+                time = 0;
+            }
+        }
+    }
 
     private void LateUpdate() 
     {
@@ -119,10 +143,15 @@ public class MoveTest : MonoBehaviour
         Debug.Log("Ohlala on va vite");
         if(context.performed)
         {
-           playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
+            isBoosting = true;
+            // playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, Time.deltaTime);
         }
-        else
+        else if(context.canceled)
         {
+            Debug.Log("Retour a la normale");
+            time = 0;
+            isBoosting = false;
+            isSlowing = true;            
             playerParent.m_Speed = trailSpeed;
         }
     }
@@ -130,13 +159,16 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a baisser la vitesse sur l'axe Z
     public void SlowDown(InputAction.CallbackContext context)
     {
+        if(isBoosting)
+        {
         if(context.performed)
         {
             playerParent.m_Speed = slowTrailSpeed;
         }
-        else
+        else if(context.canceled)
         {
             playerParent.m_Speed = trailSpeed;
+        }
         }
     }
 

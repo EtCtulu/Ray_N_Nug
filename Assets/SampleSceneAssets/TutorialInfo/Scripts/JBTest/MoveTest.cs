@@ -58,6 +58,14 @@ public class MoveTest : MonoBehaviour
     private bool isStopping = false;
 
     private bool isSpeeding = false;
+
+    private bool isInvicible = false;
+
+    private bool shotsDismissal = false;
+
+    private bool canSideDash = false;
+
+    private bool sideSecurity = false;
     
 
 
@@ -145,7 +153,7 @@ public class MoveTest : MonoBehaviour
 
         Vector3 vRotation = new Vector3(NormInputX, NormInputY, 0);
         
-        Debug.Log(moveInput);
+        // Debug.Log(moveInput);
         rbCharacter.velocity = moveInput * strafeSpeed;
 
         rbCharacterTransform.rotation = Quaternion.Slerp(Quaternion.LookRotation(new Vector2(0,0), transform.up), Quaternion.LookRotation(vRotation, transform.up), Time.deltaTime * 5f);
@@ -195,5 +203,58 @@ public class MoveTest : MonoBehaviour
         }
         }
     }
+
+
+    #region Strafe
+
+    public void Strafe(InputAction.CallbackContext context)
+    {
+        if(context.performed){
+        if(sideSecurity)
+        {
+            Debug.Log("Non");
+            return;
+        }
+        if(canSideDash)
+        {
+            Debug.Log("SideDASH SPEEEEED");
+            strafeSpeed = strafeSpeed * 3;
+            sideSecurity = true;
+            Invoke("ResetSpeed", 0.3f);
+            return;
+        }
+        Debug.Log("Initial Strafe");
+        isInvicible = true;
+        shotsDismissal = true;
+        canSideDash = true;
+        Invoke("DeactivateDismissal", 0.2f);
+        Invoke("DeactivateSideDash", 0.25f);
+        Invoke("DeactivateInvicible", 1f);
+        }
+    }
+
+    public void DeactivateDismissal()
+    {
+        shotsDismissal = false;
+    }
+
+    public void DeactivateInvicible()
+    {
+        isInvicible = false;
+        sideSecurity = false;
+    }
+
+    public void DeactivateSideDash()
+    {
+        canSideDash = false;
+    }
+
+    public void ResetSpeed()
+    {
+        strafeSpeed = strafeSpeed / 3;
+    }
+
+    #endregion
+
 
 }

@@ -11,6 +11,8 @@ public class MoveTest : MonoBehaviour
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
 
+    public Vector2 localScale;
+
     private Transform rbCharacterTransform;
     public AccelerateInput instance;
 
@@ -154,7 +156,7 @@ public class MoveTest : MonoBehaviour
         Vector3 vRotation = new Vector3(NormInputX, NormInputY, 0);
         
         // Debug.Log(moveInput);
-        rbCharacter.velocity = moveInput * strafeSpeed;
+        rbCharacter.velocity = transform.TransformDirection(moveInput * strafeSpeed);
 
         rbCharacterTransform.rotation = Quaternion.Slerp(Quaternion.LookRotation(new Vector2(0,0), transform.up), Quaternion.LookRotation(vRotation, transform.up), Time.deltaTime * 5f);
 

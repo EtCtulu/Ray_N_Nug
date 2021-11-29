@@ -220,7 +220,7 @@ public class MoveTest : MonoBehaviour
             Debug.Log("SideDASH SPEEEEED");
             strafeSpeed = strafeSpeed * 3;
             sideSecurity = true;
-            Invoke("ResetSpeed", 0.3f);
+            Invoke("ResetSpeed", 0.2f);
             return;
         }
         Debug.Log("Initial Strafe");

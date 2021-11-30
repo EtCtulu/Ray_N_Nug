@@ -14,6 +14,9 @@ public class MoveTest : MonoBehaviour
     public Vector2 localScale;
 
     private Transform rbCharacterTransform;
+    private Vector3 rbLocalForward;
+    private Vector3 rbLocalUp;
+    private Quaternion rbLocalRotation;
     public AccelerateInput instance;
 
     [Header("Parent du character")]
@@ -119,7 +122,7 @@ public class MoveTest : MonoBehaviour
         if(!isMoving)
         {
             Debug.Log("Stop Move");
-            rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.rotation, Quaternion.LookRotation(new Vector2(0,0), transform.up), Time.deltaTime * 4f);
+            //rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.LookRotation(new Vector2(0,0), transform.up), Time.deltaTime * 4f);
         }      
     }
 
@@ -153,12 +156,18 @@ public class MoveTest : MonoBehaviour
         }
         Vector2 moveInput = new Vector2(inputX, inputY);
 
-        Vector3 vRotation = new Vector3(NormInputX, NormInputY, 0);
+        Vector2 vRotation = new Vector3(NormInputX, NormInputY);
         
         // Debug.Log(moveInput);
         rbCharacter.velocity = transform.TransformDirection(moveInput * strafeSpeed);
 
-        rbCharacterTransform.rotation = Quaternion.Slerp(Quaternion.LookRotation(new Vector2(0,0), transform.up), Quaternion.LookRotation(vRotation, transform.up), Time.deltaTime * 5f);
+        rbLocalForward = rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.forward);
+        rbLocalUp = rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.up);
+        rbLocalRotation = rbCharacterTransform.localRotation;
+        
+
+        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(rbCharacterTransform.forward, rbCharacterTransform.up), Quaternion.LookRotation(transform.TransformDirection(vRotation), rbLocalUp), Time.deltaTime);
+        
 
         if (context.ReadValue<Vector2>() == new Vector2(0,0))
         {

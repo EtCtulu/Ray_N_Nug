@@ -11,8 +11,6 @@ public class MoveTest : MonoBehaviour
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
 
-    public Vector2 localScale;
-
     private Transform rbCharacterTransform;
     public AccelerateInput instance;
 
@@ -21,16 +19,29 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Script utilisé pour déplacer le joueur sur l'axe Z, on y trouve sa vitesse.")]
     public CinemachineDollyCart playerParent;
 
+    [Range(5, 100)]
     [Header("Vitesse sur l'axe Z")]
     [Space(10)]
     [Tooltip("Vitesse sans boost")]
     public float trailSpeed = 20;
 
+    [Range(5, 100)]
     [Tooltip("Vitesse avec boost")]
     public float boostTrailSpeed = 50;
 
+    [Range(5, 100)]
     [Tooltip("Vitesse avec frein")]
     public float slowTrailSpeed = 10;
+
+    [Header("Vitesse sur l'axe X et Y")]
+    [Space(10)]
+    [Tooltip("Vitesse du boost")]
+    [Range(0, 6)]
+    public int strafeSpeedMultiply = 3;
+
+    [Range(5, 30)]
+    [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
+    public float strafeSpeed = 20f;
 
     private float time = 0;
 
@@ -44,12 +55,7 @@ public class MoveTest : MonoBehaviour
 
     public float inputX { get; private set; }
     public float inputY { get; private set; }
-
-
-    [Header("Valeur de vitesse de côté")]
-    [Space(10)]
-    [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
-    public float strafeSpeed = 20f;
+    
 
     private bool isMoving = false;
 
@@ -220,7 +226,7 @@ public class MoveTest : MonoBehaviour
         if(canSideDash)
         {
             Debug.Log("SideDASH SPEEEEED");
-            strafeSpeed = strafeSpeed * 3;
+            strafeSpeed = strafeSpeed * strafeSpeedMultiply;
             sideSecurity = true;
             Invoke("ResetSpeed", 0.2f);
             return;
@@ -253,7 +259,7 @@ public class MoveTest : MonoBehaviour
 
     public void ResetSpeed()
     {
-        strafeSpeed = strafeSpeed / 3;
+        strafeSpeed = strafeSpeed / strafeSpeedMultiply;
     }
 
     #endregion

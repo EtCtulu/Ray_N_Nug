@@ -172,7 +172,7 @@ public class MoveTest : MonoBehaviour
         rbLocalRotation = rbCharacterTransform.localRotation;
         
 
-        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(rbCharacterTransform.forward, rbCharacterTransform.up), Quaternion.LookRotation(transform.TransformDirection(vRotation), rbLocalUp), Time.deltaTime);
+        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(transform.forward, transform.up), Quaternion.LookRotation(transform.TransformDirection(moveInput), rbCharacterTransform.up), .4f);
         
 
         if (context.ReadValue<Vector2>() == new Vector2(0,0))

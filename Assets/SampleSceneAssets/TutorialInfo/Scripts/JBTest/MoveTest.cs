@@ -193,11 +193,11 @@ public class MoveTest : MonoBehaviour
     public void Accelerate(InputAction.CallbackContext context)
     {
         Debug.Log("Ohlala on va vite");
-        if(context.performed)
+        if(context.performed && !isBoosting)
         {
             isBoosting = true;
         }
-        else if(context.canceled)
+        else if(context.canceled && isBoosting)
         {
             Debug.Log("Retour a la normale");
             time = 0;
@@ -212,13 +212,13 @@ public class MoveTest : MonoBehaviour
     {
         if(!isBoosting)
         {
-        if(context.performed)
+        if(context.performed && !isStopping)
         {
             Debug.Log("Ohlala on va lentement");
             isStopping = true;
             // playerParent.m_Speed = slowTrailSpeed;
         }
-        else if(context.canceled)
+        else if(context.canceled && isStopping)
         {
             Debug.Log("ON EST PLUS LENT");
             time = 0;

@@ -77,8 +77,10 @@ public class MoveTest : MonoBehaviour
     private bool canSideDash = false;
 
     private bool sideSecurity = false;
-    
 
+    //private Vector3 currentEulerAngles;
+    //private Quaternion currentRotation; 
+    
 
     private void Awake() 
     {
@@ -137,44 +139,22 @@ public class MoveTest : MonoBehaviour
     {
         Vector2 rawMoveInput = context.ReadValue<Vector2>();
         //Debug.Log(rawMoveInput);
-        rbCharacter.velocity = rawMoveInput * strafeSpeed;
+        //rbCharacter.velocity = rawMoveInput * strafeSpeed;
         isMoving = true;
-        if (Mathf.Abs(rawMoveInput.x) > 0.1f)
-        {
-            inputX = (rawMoveInput * Vector2.right).x;
-            NormInputX = (rawMoveInput * Vector2.right).normalized.x;
-        }
-        else
-        {
-            inputX = 0;
-            NormInputX = 0;
-        }
-
-        if (Mathf.Abs(rawMoveInput.y) > 0.1f)
-        {
-            inputY = (rawMoveInput * Vector2.up).y;
-            NormInputY = (rawMoveInput * Vector2.up).normalized.y;
-        }
-        else
-        {
-            inputY = 0;
-            NormInputX = 0;
-        }
-        Vector2 moveInput = new Vector2(inputX, inputY);
-
-        Vector2 vRotation = new Vector3(NormInputX, NormInputY);
-        
+ 
         // Debug.Log(moveInput);
-        rbCharacter.velocity = transform.TransformDirection(moveInput * strafeSpeed);
-
-        rbLocalForward = rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.forward);
-        rbLocalUp = rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.up);
-        rbLocalRotation = rbCharacterTransform.localRotation;
+        rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
         
+        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(transform.forward, transform.up), 
+        Quaternion.LookRotation(rawMoveInput, rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.up)), .4f);  
 
-        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(transform.forward, transform.up), Quaternion.LookRotation(transform.TransformDirection(moveInput), rbCharacterTransform.up), .4f);
+        /*currentEulerAngles += new Vector3(rawMoveInput.x, rawMoveInput.y, 0) * 45 * Time.deltaTime;
+
+        currentRotation.eulerAngles = currentEulerAngles;
+
+        rbCharacterTransform.rotation*/
+
         
-
         if (context.ReadValue<Vector2>() == new Vector2(0,0))
         {
             isMoving = false;

@@ -46,6 +46,13 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
 
+    [Header("Cooldowns")]
+    [Space(10)]
+    [Range(0, 10)]
+    [Tooltip("Cooldown du dash de côté")]
+    public float sideDashCooldown = 1f;
+
+
     private float time = 0;
 
     // Valeures pour le déplacement des personnages.
@@ -247,6 +254,7 @@ public class MoveTest : MonoBehaviour
         Invoke("DeactivateDismissal", 0.2f);
         Invoke("DeactivateSideDash", 0.25f);
         Invoke("DeactivateInvicible", 1f);
+        Invoke("CooldownSideDash", sideDashCooldown);
         }
     }
 
@@ -258,7 +266,7 @@ public class MoveTest : MonoBehaviour
     public void DeactivateInvicible()
     {
         isInvicible = false;
-        sideSecurity = false;
+        
     }
 
     public void DeactivateSideDash()
@@ -269,6 +277,11 @@ public class MoveTest : MonoBehaviour
     public void ResetSpeed()
     {
         strafeSpeed = strafeSpeed / strafeSpeedMultiply;
+    }
+    
+    public void CooldownSideDash()
+    {
+        sideSecurity = false;
     }
 
     #endregion

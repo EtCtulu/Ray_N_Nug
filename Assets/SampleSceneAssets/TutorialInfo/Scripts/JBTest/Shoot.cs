@@ -7,11 +7,14 @@ public class Shoot : MonoBehaviour
 {
 
     private GameObject ray;
-    public GameObject target;
+    private GameObject nug;
+    private GameObject target;
+    public GameObject bullet;
 
     private void Awake() 
     {
         ray = transform.GetChild(0).gameObject;
+        nug = ray.transform.GetChild(4).gameObject;
         target = ray.transform.GetChild(0).gameObject;
     }
 
@@ -19,8 +22,9 @@ public class Shoot : MonoBehaviour
     {
         if(context.performed)
         {
-            Debug.Log("Piou");
-            Debug.DrawRay(ray.transform.position, target.transform.position);
+            Vector3 dir = target.transform.position - nug.transform.position;
+            Quaternion bulletRotation = Quaternion.LookRotation(dir, bullet.transform.InverseTransformDirection(bullet.transform.up));
+            //Instantiate(bullet, nug.transform.position, bulletRotation);
         }
     }
 }

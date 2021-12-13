@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -352,11 +352,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerParent: {fileID: 400385176}
-  trailSpeed: 30
+  trailSpeed: 5
   boostTrailSpeed: 80
   slowTrailSpeed: 10
   strafeSpeedMultiply: 3
   strafeSpeed: 10
+  rotationAngle: 30
   sideDashCooldown: 1
 --- !u!114 &400385172
 MonoBehaviour:
@@ -610,13 +611,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443549570}
-  m_LocalRotation: {x: 0, y: -0.01548538, z: 0, w: 0.99988014}
-  m_LocalPosition: {x: 0.30967033, y: 8.13, z: -11.725369}
+  m_LocalRotation: {x: 0.15657562, y: -0.015294338, z: 0.0024249246, w: 0.9875446}
+  m_LocalPosition: {x: 0.2678648, y: 15.75, z: -10.376017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.352, y: -1.775, z: 0}
 --- !u!114 &443549572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,6 +1119,7 @@ MonoBehaviour:
   slowTrailSpeed: 10
   strafeSpeedMultiply: 3
   strafeSpeed: 20
+  rotationAngle: 45
   sideDashCooldown: 1
 --- !u!54 &888866193
 Rigidbody:
@@ -4470,7 +4472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49172acd138c64b459d76678f4edf639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6220415616763024952}
+  bullet: {fileID: 2001257396705074006, guid: fb5fe501f8753434f9f1d913f33ba865, type: 3}
 --- !u!23 &4713644011563327868
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5561,7 +5563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9151606445974192793}
   - component: {fileID: 1894789979}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Shot Point
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -6723,14 +6725,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2310751199422121781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.13, z: -10}
+  m_LocalRotation: {x: 0.15659441, y: -9.3132246e-10, z: 9.3132246e-10, w: 0.9876631}
+  m_LocalPosition: {x: 0, y: 9.75, z: -8.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 990039598522720346}
   m_Father: {fileID: 760865330720350590}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.019, y: 0, z: 0}
 --- !u!4 &8110602034632230946
 Transform:
   m_ObjectHideFlags: 0
@@ -7195,7 +7197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6220415616763024952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9.53}
+  m_LocalPosition: {x: 0, y: 0, z: 17.12}
   m_LocalScale: {x: 0.25375465, y: 0.25375465, z: 0.25375465}
   m_Children: []
   m_Father: {fileID: 3634508167742385937}

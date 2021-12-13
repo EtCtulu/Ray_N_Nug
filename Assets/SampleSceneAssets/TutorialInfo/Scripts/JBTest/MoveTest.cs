@@ -46,6 +46,10 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
 
+    [Range(0, 90)]
+    [Tooltip("L'angle de rotation du character lorsqu'il se déplace sur les axes X et Y")]
+    public int rotationAngle = 45;
+
     [Header("Cooldowns")]
     [Space(10)]
     [Range(0, 10)]
@@ -132,40 +136,14 @@ public class MoveTest : MonoBehaviour
         }
     }
 
-    private void LateUpdate() 
-    {
-        if(!isMoving)
-        {
-            Debug.Log("Stop Move");
-            //rbCharacterTransform.rotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.LookRotation(new Vector2(0,0), transform.up), Time.deltaTime * 4f);
-        }      
-    }
-
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 rawMoveInput = context.ReadValue<Vector2>();
-        //Debug.Log(rawMoveInput);
-        //rbCharacter.velocity = rawMoveInput * strafeSpeed;
-        isMoving = true;
- 
-        // Debug.Log(moveInput);
+
         rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
         
-        rbCharacterTransform.localRotation = Quaternion.Slerp(Quaternion.LookRotation(transform.forward, transform.up), 
-        Quaternion.LookRotation(rawMoveInput, rbCharacterTransform.InverseTransformDirection(rbCharacterTransform.up)), .4f);  
-
-        /*currentEulerAngles += new Vector3(rawMoveInput.x, rawMoveInput.y, 0) * 45 * Time.deltaTime;
-
-        currentRotation.eulerAngles = currentEulerAngles;
-
-        rbCharacterTransform.rotation*/
-
-        
-        if (context.ReadValue<Vector2>() == new Vector2(0,0))
-        {
-            isMoving = false;
-        }
+        rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
     }
 
 

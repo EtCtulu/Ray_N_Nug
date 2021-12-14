@@ -24,7 +24,7 @@ public class Shoot : MonoBehaviour
         {
             Vector3 dir = target.transform.position - nug.transform.position;
             Quaternion bulletRotation = Quaternion.LookRotation(dir, bullet.transform.InverseTransformDirection(bullet.transform.up));
-            //Instantiate(bullet, nug.transform.position, bulletRotation);
+            Instantiate(bullet, nug.transform.position, bulletRotation, transform);
         }
     }
 }

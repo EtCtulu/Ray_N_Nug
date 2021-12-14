@@ -144,6 +144,8 @@ public class MoveTest : MonoBehaviour
         rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
         
         rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
+
+        //rbCharacterTransform.localRotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f), .1f);
     }
 
 

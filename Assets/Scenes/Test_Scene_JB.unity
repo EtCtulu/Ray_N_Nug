@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,7 +611,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443549570}
-  m_LocalRotation: {x: 0.14491618, y: -0.015321876, z: 0.002244352, w: 0.9893227}
+  m_LocalRotation: {x: 0.16477317, y: -0.015273645, z: 0.0025518776, w: 0.9862099}
   m_LocalPosition: {x: 0.5945672, y: 12.6, z: -20.920958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2268,7 +2268,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273960882205447473}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 5.024296e-15, y: -0.7071068, z: 5.024296e-15, w: 0.7071068}
   m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2742,7 +2742,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496564179925415195}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 1e-45, y: 0.70710677, z: -1e-45, w: 0.7071068}
   m_LocalPosition: {x: -10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4476,7 +4476,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 3634508167742385937}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -4722,7 +4722,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 3634508167742385937}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -5208,7 +5208,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2633376209425099037}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalRotation: {x: 0.22975293, y: -0, z: -2.3283064e-10, w: 0.9732491}
   m_LocalPosition: {x: 0, y: 10, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5337,7 +5337,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 3634508167742385937}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -5651,7 +5651,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
-  m_YawDamping: 0
+  m_YawDamping: 1
   m_RollDamping: 0
   m_AngularDamping: 0
 --- !u!4 &6117463824958871409
@@ -6341,17 +6341,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
+  m_LookaheadTime: 0.2
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 2
+  m_VerticalDamping: 2
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_DeadZoneWidth: 0.6
+  m_DeadZoneHeight: 0.6
+  m_SoftZoneWidth: 0.9
+  m_SoftZoneHeight: 0.9
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -6928,8 +6928,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2310751199422121781}
-  m_LocalRotation: {x: 0.14493357, y: -9.3132246e-10, z: 6.984919e-10, w: 0.98944145}
-  m_LocalPosition: {x: -0, y: 6.6, z: -19.2}
+  m_LocalRotation: {x: 0.16479294, y: 0.00000002142042, z: -0.000000003259629, w: 0.98632824}
+  m_LocalPosition: {x: 0, y: 6.6, z: -19.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 990039598522720346}
@@ -7213,7 +7213,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 47
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 3634508167742385937}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60

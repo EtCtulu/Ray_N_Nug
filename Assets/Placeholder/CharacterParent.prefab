@@ -202,7 +202,10 @@ MonoBehaviour:
   trailSpeed: 20
   boostTrailSpeed: 50
   slowTrailSpeed: 10
+  strafeSpeedMultiply: 3
   strafeSpeed: 10
+  rotationAngle: 45
+  sideDashCooldown: 1
 --- !u!114 &8966192071850769877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +295,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 26e7f9ef-4162-428c-95df-bc14892c5e28
     m_ActionName: Accelerate/Shoot[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11270d78-edd1-4022-907b-f7ef14b96a79
+    m_ActionName: Accelerate/Strafe
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Accelerate
@@ -309,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49172acd138c64b459d76678f4edf639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
 --- !u!114 &8966192071850769881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +478,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 5628951716213929552}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -544,7 +552,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 11
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 5628951716213929552}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -806,7 +814,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 5628951716213929552}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
@@ -1004,7 +1012,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 5628951716213929552}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60

@@ -7,6 +7,8 @@ using Cinemachine;
 public class MoveTest : MonoBehaviour
 {
 
+    #region Usefull Variables To Setup
+
     // Déclarations des variables utiles
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
@@ -17,10 +19,16 @@ public class MoveTest : MonoBehaviour
     private Quaternion rbLocalRotation;
     public AccelerateInput instance;
 
+    
+
     [Header("Parent du character")]
     [Space(10)]
     [Tooltip("Script utilisé pour déplacer le joueur sur l'axe Z, on y trouve sa vitesse.")]
     public CinemachineDollyCart playerParent;
+
+    #endregion
+
+    #region Trail Variables
 
     [Range(5, 100)]
     [Header("Vitesse sur l'axe Z")]
@@ -36,6 +44,10 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Vitesse avec frein")]
     public float slowTrailSpeed = 10;
 
+    #endregion
+
+    #region Side Dash Variables
+
     [Header("Vitesse sur l'axe X et Y")]
     [Space(10)]
     [Tooltip("Vitesse du boost")]
@@ -46,9 +58,19 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Valeur de vitesse utilisé pour le déplacement en X et Y de Ray")]
     public float strafeSpeed = 20f;
 
+    #endregion
+
+    #region Rotation and Quaternions
+
     [Range(0, 90)]
     [Tooltip("L'angle de rotation du character lorsqu'il se déplace sur les axes X et Y")]
     public int rotationAngle = 45;
+
+    #endregion
+
+    #region  Cooldowns
+
+    #region Side Dash Cooldowns
 
     [Header("Cooldowns")]
     [Space(10)]
@@ -56,8 +78,43 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Cooldown du dash de côté")]
     public float sideDashCooldown = 1f;
 
+    #endregion
+
+    #endregion
+
+    #region Durations
+
+    #region Side Dash Durations
+
+    [Header("Durations")]
+    [Space(10)]
+    [Range(0,3)]
+    [Tooltip("Durée du renvoi de tirs")]
+    public float dismissalDuration = 0.2f;
+
+    [Range(0,3)]
+    [Tooltip("Durée de la fenetre pour faire un boost de côté")]
+    public float sideBoostWindowDuration = 0.2f;
+
+    [Range(0,3)]
+    [Tooltip("Durée de l'insensibilité aux tirs ennemis")]
+    public float dashInvicibilityDuration = 1f;
+
+    [Range(0,3)]
+    [Tooltip("Le temps que le boost de vitesse dure")]
+    public float sideBoostDuration = 2f;
+
+    #endregion
+
+    #endregion
+
+    #region Multipurpose Timer
 
     private float time = 0;
+
+    #endregion
+
+    #region Move Variables
 
     // Valeures pour le déplacement des personnages.
 
@@ -69,7 +126,10 @@ public class MoveTest : MonoBehaviour
 
     public float inputX { get; private set; }
     public float inputY { get; private set; }
+
+    #endregion
     
+    #region Boost Variables
 
     private bool isMoving = false;
 
@@ -81,6 +141,10 @@ public class MoveTest : MonoBehaviour
 
     private bool isSpeeding = false;
 
+    #endregion
+
+    #region Side Dash Variables
+
     private bool isInvicible = false;
 
     private bool shotsDismissal = false;
@@ -89,19 +153,30 @@ public class MoveTest : MonoBehaviour
 
     private bool sideSecurity = false;
 
+    #endregion
+
     //private Vector3 currentEulerAngles;
     //private Quaternion currentRotation; 
     
 
     private void Awake() 
     {
+
+        #region Variables Assign
+
         aInput = new AccelerateInput();
         rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
         rbCharacterTransform = rbCharacter.transform;
+
+        #endregion
+
     }
 
     private void Update()
     {
+
+        #region Speed Modifiers In Update
+
         if(isBoosting)
         {
             time += Time.deltaTime;
@@ -134,7 +209,12 @@ public class MoveTest : MonoBehaviour
                 time = 0;
             }
         }
+
+    #endregion
+
     }
+
+    #region Side Move
 
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
@@ -148,6 +228,9 @@ public class MoveTest : MonoBehaviour
         //rbCharacterTransform.localRotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f), .1f);
     }
 
+    #endregion
+
+    #region Speed Modifiers
 
     // Fonction qui sert a augmenter la vitesse sur l'axe Z
     public void Accelerate(InputAction.CallbackContext context)
@@ -188,6 +271,7 @@ public class MoveTest : MonoBehaviour
         }
     }
 
+    #endregion
 
     #region Strafe
 
@@ -204,16 +288,16 @@ public class MoveTest : MonoBehaviour
             Debug.Log("SideDASH SPEEEEED");
             strafeSpeed = strafeSpeed * strafeSpeedMultiply;
             sideSecurity = true;
-            Invoke("ResetSpeed", 0.2f);
+            Invoke("ResetSpeed", sideBoostDuration);
             return;
         }
         Debug.Log("Initial Strafe");
         isInvicible = true;
         shotsDismissal = true;
         canSideDash = true;
-        Invoke("DeactivateDismissal", 0.2f);
-        Invoke("DeactivateSideDash", 0.25f);
-        Invoke("DeactivateInvicible", 1f);
+        Invoke("DeactivateDismissal", dismissalDuration);
+        Invoke("DeactivateSideDash", sideBoostWindowDuration);
+        Invoke("DeactivateInvicible", dashInvicibilityDuration);
         Invoke("CooldownSideDash", sideDashCooldown);
         }
     }

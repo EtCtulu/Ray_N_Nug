@@ -18,6 +18,7 @@ public class MoveTest : MonoBehaviour
     private Vector3 rbLocalUp;
     private Quaternion rbLocalRotation;
     public AccelerateInput instance;
+    public PlayerStats playerStats;
 
     
 
@@ -43,6 +44,11 @@ public class MoveTest : MonoBehaviour
     [Range(5, 100)]
     [Tooltip("Vitesse avec frein")]
     public float slowTrailSpeed = 10;
+
+    [Header("Vitesse de drain du boost")]
+    [Space(10)]
+    [Tooltip("Vitesse de drain du systeme de boost")]
+    public int boostbarDrainSpeed;
 
     #endregion
 
@@ -140,6 +146,7 @@ public class MoveTest : MonoBehaviour
     private bool isStopping = false;
 
     private bool isSpeeding = false;
+    
 
     #endregion
 
@@ -177,10 +184,14 @@ public class MoveTest : MonoBehaviour
 
         #region Speed Modifiers In Update
 
-        if(isBoosting)
+        if(isBoosting == true && playerStats.playerBoost != 0)
         {
             time += Time.deltaTime;
             playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, time);
+            playerStats.playerBoost -= Time.deltaTime * boostbarDrainSpeed;
+            playerStats.playerBoost = Mathf.Clamp(playerStats.playerBoost, 0, 100);
+            Debug.Log(playerStats.playerBoost);
+
         }
         if(isSlowing)
         {

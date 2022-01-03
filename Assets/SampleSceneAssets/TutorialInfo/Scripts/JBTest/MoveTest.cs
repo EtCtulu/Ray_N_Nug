@@ -166,6 +166,8 @@ public class MoveTest : MonoBehaviour
     private bool isMegaBoosting = false;
 
     private bool megaBoostSecurity = false;
+
+    private bool touchedByEnemy;
     
 
     #endregion
@@ -203,7 +205,7 @@ public class MoveTest : MonoBehaviour
     private void Update()
     {
 
-        if(shotsDismissal && isBoosting && !megaBoostSecurity)
+        if(shotsDismissal && isBoosting && !megaBoostSecurity && touchedByEnemy)
         {
             actualBoostSpeed = megaBoostTrailSpeed;
             Invoke("CooldownSideDash", sideDashCooldown);

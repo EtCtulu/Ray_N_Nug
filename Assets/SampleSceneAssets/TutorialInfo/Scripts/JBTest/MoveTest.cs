@@ -43,6 +43,12 @@ public class MoveTest : MonoBehaviour
     public float boostTrailSpeed = 50;
 
     [Range(5, 100)]
+    [Tooltip("Vitesse avec boost")]
+    public float megaBoostTrailSpeed = 100;
+
+    private float actualBoostSpeed;
+
+    [Range(5, 100)]
     [Tooltip("Vitesse avec frein")]
     public float slowTrailSpeed = 10;
 
@@ -84,6 +90,17 @@ public class MoveTest : MonoBehaviour
     [Range(0, 10)]
     [Tooltip("Cooldown du dash de côté")]
     public float sideDashCooldown = 1f;
+
+    #endregion
+
+    #region Boost Cooldowns
+
+    [Space(10)]
+    [Range(0, 10)]
+    [Tooltip("Cooldown du Mega Boost")]
+    public float megaBoostCooldown = 4f;
+
+    #endregion
 
     #endregion
 
@@ -147,6 +164,8 @@ public class MoveTest : MonoBehaviour
     private bool isSpeeding = false;
 
     private bool isMegaBoosting = false;
+
+    private bool megaBoostSecurity = false;
     
 
     #endregion
@@ -175,6 +194,7 @@ public class MoveTest : MonoBehaviour
         aInput = new AccelerateInput();
         rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
         rbCharacterTransform = rbCharacter.transform;
+        actualBoostSpeed = boostTrailSpeed;
 
         #endregion
 
@@ -183,13 +203,18 @@ public class MoveTest : MonoBehaviour
     private void Update()
     {
 
+        if(shotsDismissal && isBoosting && !megaBoostSecurity)
+        {
+            actualBoostSpeed = megaBoostTrailSpeed;
+            Invoke("CooldownSideDash", sideDashCooldown);
+        }
 
         #region Speed Modifiers In Update
 
         if(isBoosting == true && playerStats.playerBoost != 0)
         {
             time += Time.deltaTime;
-            playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, time);
+            playerParent.m_Speed = Mathf.Lerp(trailSpeed, actualBoostSpeed, time);
             if(!isMegaBoosting)
             {
                 playerStats.playerBoost -= Time.deltaTime * boostbarDrainSpeed;
@@ -201,7 +226,7 @@ public class MoveTest : MonoBehaviour
         if(isSlowing)
         {
             time += Time.deltaTime * 2;
-            playerParent.m_Speed = Mathf.Lerp(boostTrailSpeed, trailSpeed, time);
+            playerParent.m_Speed = Mathf.Lerp(actualBoostSpeed, trailSpeed, time);
             if(time >= 1)
             {
                 isSlowing = false;
@@ -346,6 +371,10 @@ public class MoveTest : MonoBehaviour
 
     #endregion
 
+    public void DeactivateOverBoost()
+    {
+        actualBoostSpeed = boostTrailSpeed;
+        megaBoostSecurity = false;
+    }
 
 }
-#endregion

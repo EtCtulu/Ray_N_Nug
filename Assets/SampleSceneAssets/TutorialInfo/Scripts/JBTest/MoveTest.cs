@@ -16,6 +16,7 @@ public class MoveTest : MonoBehaviour
     private Transform rbCharacterTransform;
     private Vector3 rbLocalForward;
     private Vector3 rbLocalUp;
+
     private Quaternion rbLocalRotation;
     public AccelerateInput instance;
     public PlayerStats playerStats;
@@ -86,8 +87,6 @@ public class MoveTest : MonoBehaviour
 
     #endregion
 
-    #endregion
-
     #region Durations
 
     #region Side Dash Durations
@@ -146,6 +145,8 @@ public class MoveTest : MonoBehaviour
     private bool isStopping = false;
 
     private bool isSpeeding = false;
+
+    private bool isMegaBoosting = false;
     
 
     #endregion
@@ -182,15 +183,19 @@ public class MoveTest : MonoBehaviour
     private void Update()
     {
 
+
         #region Speed Modifiers In Update
 
         if(isBoosting == true && playerStats.playerBoost != 0)
         {
             time += Time.deltaTime;
             playerParent.m_Speed = Mathf.Lerp(trailSpeed, boostTrailSpeed, time);
-            playerStats.playerBoost -= Time.deltaTime * boostbarDrainSpeed;
-            playerStats.playerBoost = Mathf.Clamp(playerStats.playerBoost, 0, 100);
-            Debug.Log(playerStats.playerBoost);
+            if(!isMegaBoosting)
+            {
+                playerStats.playerBoost -= Time.deltaTime * boostbarDrainSpeed;
+                playerStats.playerBoost = Mathf.Clamp(playerStats.playerBoost, 0, 100);
+                Debug.Log(playerStats.playerBoost);
+            }
 
         }
         if(isSlowing)
@@ -343,3 +348,4 @@ public class MoveTest : MonoBehaviour
 
 
 }
+#endregion

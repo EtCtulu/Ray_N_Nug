@@ -14,6 +14,7 @@ public class ObjectSpawner : MonoBehaviour
         [Tooltip("préfab associé à l'objet")] 
         public GameObject prefab;
         [Tooltip("nombre d'objets à instancier")] 
+        [Range(0,50)]
         public int size;
     }
 

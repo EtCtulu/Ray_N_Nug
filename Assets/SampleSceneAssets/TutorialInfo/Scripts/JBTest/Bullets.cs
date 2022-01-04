@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullets : MonoBehaviour
+public class Bullets : MonoBehaviour, IPooledObject
 {
     [Header("Paramètres de la balle")]
     [Space(10)]
@@ -14,6 +14,11 @@ public class Bullets : MonoBehaviour
     private float travelledDistance;
 
     Vector3 velocity = Vector3.forward;
+
+    public void OnObjectSpawn()
+    {
+        travelledDistance = 0f;
+    }
     private void Update() 
     {
         Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
@@ -22,7 +27,7 @@ public class Bullets : MonoBehaviour
         Debug.Log(travelledDistance);
         if(travelledDistance > bulletRange)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

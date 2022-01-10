@@ -19,6 +19,10 @@ public class Shoot : MonoBehaviour
         target = ray.transform.GetChild(0).gameObject;
         objSpawn = ObjectSpawner.Instance;
     }
+    private void Start() 
+    {
+        
+    }
 
     public void Shooting(InputAction.CallbackContext context)
     {

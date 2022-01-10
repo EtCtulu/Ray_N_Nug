@@ -49,8 +49,7 @@ public class ObjectSpawner : MonoBehaviour
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
+                GameObject obj = Instantiate(pool.prefab, new Vector3(0, -10000, 0), Quaternion.identity);
                 objectPool.Enqueue(obj);
             }
 
@@ -68,7 +67,6 @@ public class ObjectSpawner : MonoBehaviour
 
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 

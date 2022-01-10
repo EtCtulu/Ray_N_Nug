@@ -15,19 +15,31 @@ public class Bullets : MonoBehaviour, IPooledObject
 
     Vector3 velocity = Vector3.forward;
 
+    private bool shooted;
+
+    private void Awake() 
+    {
+        shooted = false;
+    }
+
     public void OnObjectSpawn()
     {
+        shooted = true;
         travelledDistance = 0f;
     }
+
     private void Update() 
     {
-        Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
-        transform.position += transform.TransformDirection(velMetersPerFrame);
-        travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
-        Debug.Log(travelledDistance);
-        if(travelledDistance > bulletRange)
+        if(shooted)
         {
-            gameObject.SetActive(false);
+            Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
+            transform.position += transform.TransformDirection(velMetersPerFrame);
+            travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
+            if(travelledDistance > bulletRange)
+            {
+                gameObject.transform.position = new Vector3(0, -10000, 0);
+                shooted = false;
+            }
         }
     }
 }

@@ -186,7 +186,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226072994464678224}
-  m_LocalRotation: {x: 0.16479293, y: 0.000000006519258, z: -9.313226e-10, w: 0.98632824}
+  m_LocalRotation: {x: 0.16479294, y: 0.00000002142042, z: -0.000000003259629, w: 0.98632824}
   m_LocalPosition: {x: 0, y: 6.6, z: -19.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2198,7 +2198,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3646868301476533076}
-  m_LocalRotation: {x: 5.024296e-15, y: -0.7071068, z: 5.024296e-15, w: 0.7071068}
+  m_LocalRotation: {x: -7.613033e-22, y: -0.70710677, z: -3.5751242e-22, w: 0.7071068}
   m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4312,7 +4312,7 @@ GameObject:
   - component: {fileID: 2536164074260013808}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4475,7 +4475,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7084869965732888695}
-  m_LocalRotation: {x: 0, y: -0.01548538, z: 0, w: 0.99988014}
+  m_LocalRotation: {x: 0, y: -0.01548918, z: 0, w: 0.9998801}
   m_LocalPosition: {x: -0.00000015468885, y: 6, z: -1.7301655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4486,7 +4486,7 @@ Transform:
   - {fileID: 8061139180194872989}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -1.775, z: 0}
 --- !u!114 &2536164074260013814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4499,14 +4499,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666d5ad0d26e06e409e165a24ae8a2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: -1577989596081934157}
   playerParent: {fileID: 2536164074260013821}
   trailSpeed: 30
   boostTrailSpeed: 60
+  megaBoostTrailSpeed: 100
   slowTrailSpeed: 10
+  boostbarDrainSpeed: 3
   strafeSpeedMultiply: 3
   strafeSpeed: 10
   rotationAngle: 25
   sideDashCooldown: 1
+  megaBoostCooldown: 4
   dismissalDuration: 0.2
   sideBoostWindowDuration: 0.2
   dashInvicibilityDuration: 1
@@ -4633,7 +4637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49172acd138c64b459d76678f4edf639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2001257396705074006, guid: fb5fe501f8753434f9f1d913f33ba865, type: 3}
 --- !u!114 &2536164074260013821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4664,6 +4667,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 0
+  playerBoost: 100
+  playerBombs: 0
+  lockNumber: 0
 --- !u!1 &7802408704327178034
 GameObject:
   m_ObjectHideFlags: 0

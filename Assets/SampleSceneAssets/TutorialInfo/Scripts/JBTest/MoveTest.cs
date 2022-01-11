@@ -9,6 +9,10 @@ public class MoveTest : MonoBehaviour
 
     #region Usefull Variables To Setup
 
+    [Header("Variables Utiles")]
+    [Space(10)]
+    [Tooltip("Le personnage qui se déplace, le raycast des tirs part d'ici")]
+    public GameObject characterModel;
     // Déclarations des variables utiles
     public AccelerateInput aInput;
     private Rigidbody rbCharacter;
@@ -27,6 +31,11 @@ public class MoveTest : MonoBehaviour
     [Space(10)]
     [Tooltip("Script utilisé pour déplacer le joueur sur l'axe Z, on y trouve sa vitesse.")]
     public CinemachineDollyCart playerParent;
+
+    #endregion
+
+    #region Shot Variables
+    private Vector3 secondaryShotAim;
 
     #endregion
 
@@ -204,6 +213,13 @@ public class MoveTest : MonoBehaviour
 
     private void Update()
     {
+
+        #region Raycast For Secondaryshot
+
+        secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);
+        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 50, Color.green);
+
+        #endregion
 
         if(shotsDismissal && isBoosting && !megaBoostSecurity && touchedByEnemy)
         {

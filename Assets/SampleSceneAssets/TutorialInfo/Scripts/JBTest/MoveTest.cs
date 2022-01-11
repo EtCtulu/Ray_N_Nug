@@ -6,7 +6,6 @@ using Cinemachine;
 
 public class MoveTest : MonoBehaviour
 {
-
     #region Usefull Variables To Setup
 
     [Header("Variables Utiles")]
@@ -196,10 +195,22 @@ public class MoveTest : MonoBehaviour
     //private Vector3 currentEulerAngles;
     //private Quaternion currentRotation; 
     
+           //définit ce script comme étant un singleton 
+    #region Singleton
+    public static MoveTest Instance;
+    
+    #endregion
 
     private void Awake() 
     {
-
+        if(Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         #region Variables Assign
 
         aInput = new AccelerateInput();

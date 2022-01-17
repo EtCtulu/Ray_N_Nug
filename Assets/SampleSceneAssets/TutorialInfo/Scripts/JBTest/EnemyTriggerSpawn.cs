@@ -7,6 +7,10 @@ public class EnemyTriggerSpawn : MonoBehaviour
     ObjectSpawner enemySpawn;
     public GameObject spawnPoint;
 
+    public int enemiesToSpawn;
+
+    public List<GameObject> enemiesSpawned;
+
     private void Awake() 
     {
         enemySpawn = ObjectSpawner.Instance;
@@ -16,7 +20,19 @@ public class EnemyTriggerSpawn : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            StartCoroutine(spawnEnemies(5));
+            StartCoroutine(spawnEnemies(enemiesToSpawn));
+        }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        if(other.CompareTag("Player"))
+        {
+            foreach(GameObject despawn in enemiesSpawned)
+            {
+                despawn.SetActive(false);
+            }
+            enemiesSpawned.Clear();
         }
     }
 
@@ -25,7 +41,7 @@ public class EnemyTriggerSpawn : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         if(enemyNum != 0)
         {
-            enemySpawn.SpawnObject("Enemy", spawnPoint.transform.position, spawnPoint.transform.rotation);
+            enemiesSpawned.Add(enemySpawn.SpawnObject("Enemy", spawnPoint.transform.position, spawnPoint.transform.rotation));
             enemyNum--;
             StartCoroutine(spawnEnemies(enemyNum));
         }

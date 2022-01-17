@@ -2,42 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPooledObject
 {
+    private bool spawned;
+    private GameObject enemyCart;
 
-    public List<GameObject> posList = new List<GameObject>();
-
-    private Vector3 nextPos;
-    private int nextPosInt;
-    public GameObject circlePoint;
-    public int circlePos;
-    public float speed = 20f;
-
-    void Start()
+    private void Awake() 
     {
-        nextPosInt = 0;
-        nextPos = posList[nextPosInt].transform.position;
-        GetCirclePoint();
+        spawned = false;
+        enemyCart = gameObject.transform.GetChild(0).gameObject;
+        gameObject.SetActive(false);
     }
-
-    private void Update() 
+    public void OnObjectSpawn()
     {
-        if(transform.position != nextPos)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
-        }
-        else
-        {
-            if(nextPosInt == posList.Count)
-            {
-                nextPosInt = circlePos;
-            }
-            else
-            {
-                nextPos = posList[nextPosInt].transform.position;
-                nextPosInt++;
-            }
-        }
+        spawned = true;
+        gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -46,17 +25,6 @@ public class Enemy : MonoBehaviour
         {
             other.gameObject.transform.position = new Vector3 (0, -10000, 0);
             gameObject.transform.position = new Vector3(0, -12000, 0);
-        }
-    }
-    
-    public void GetCirclePoint()
-    {
-        for(int i = 0; i < posList.Count; i++)
-        {
-            if(circlePoint == posList[i].gameObject)
-            {
-                circlePos = i;
-            }
         }
     }
 }

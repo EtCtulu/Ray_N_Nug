@@ -38,12 +38,11 @@ public class ObjectSpawner : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    private GameObject character;
+    public GameObject enemyTrail;
 
     // Start is called before the first frame update
     void Start()
     {
-        character = MoveTest.Instance.gameObject;
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         foreach (Pool pool in pools)
@@ -52,7 +51,7 @@ public class ObjectSpawner : MonoBehaviour
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab, new Vector3(0, -10000, 0), Quaternion.identity, character.transform);
+                GameObject obj = Instantiate(pool.prefab, new Vector3(0, -10000, 0), Quaternion.identity, enemyTrail.transform);
                 objectPool.Enqueue(obj);
             }
 

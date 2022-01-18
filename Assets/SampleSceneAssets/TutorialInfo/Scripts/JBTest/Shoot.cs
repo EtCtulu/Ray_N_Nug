@@ -9,15 +9,14 @@ public class Shoot : MonoBehaviour
     private GameObject ray;
     private GameObject nug;
     private GameObject target;
+    public GameObject bullet;
 
-    ObjectSpawner objSpawn;
 
     private void Awake() 
     {
         ray = transform.GetChild(0).gameObject;
         nug = ray.transform.GetChild(4).gameObject;
         target = ray.transform.GetChild(0).gameObject;
-        objSpawn = ObjectSpawner.Instance;
     }
     private void Start() 
     {
@@ -30,7 +29,7 @@ public class Shoot : MonoBehaviour
         {
             Vector3 dir = target.transform.position - nug.transform.position;
             Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
-            objSpawn.SpawnObject("Bullet", nug.transform.position, bulletRotation);
+            Instantiate(bullet, nug.transform.position, bulletRotation, gameObject.transform);
         }
     }
 }

@@ -1095,6 +1095,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,6 +1110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,6 +1125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,6 +1140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,6 +1155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,6 +1170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!114 &794482844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 0}
+  shootingCD: 1
 --- !u!1 &888866190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,9 +1448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Bullet
-    prefab: {fileID: 2001257396705074006, guid: fb5fe501f8753434f9f1d913f33ba865, type: 3}
-    size: 20
   - tag: Enemy
     prefab: {fileID: 4590148665847699251, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
     size: 5
@@ -2295,15 +2313,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -7.613033e-22
+      value: 5.024296e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.5751242e-22
+      value: 5.024296e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2536164074260013821, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_Path

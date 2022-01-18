@@ -37,7 +37,7 @@ public class Bullets : MonoBehaviour, IPooledObject
             travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
             if(travelledDistance > bulletRange)
             {
-                gameObject.transform.position = new Vector3(0, -10000, 0);
+                Destroy(gameObject);
                 shooted = false;
             }
         }

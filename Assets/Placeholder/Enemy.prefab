@@ -211,8 +211,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4590148665847699251}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82243dd60f96da04f92765e4599e0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  enemyProjectile: {fileID: 7387046424180439169, guid: 12e593af07c476f4cac82f8a93acd234, type: 3}
+  shootingCD: 1

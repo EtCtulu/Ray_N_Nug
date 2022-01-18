@@ -195,14 +195,12 @@ public class MoveTest : MonoBehaviour
     //private Vector3 currentEulerAngles;
     //private Quaternion currentRotation; 
     
-           //définit ce script comme étant un singleton 
-    #region Singleton
+    #region Awake
     public static MoveTest Instance;
-    
-    #endregion
 
     private void Awake() 
     {
+        #region Singleton
         if(Instance != null)
         {
             Destroy(this);
@@ -211,6 +209,7 @@ public class MoveTest : MonoBehaviour
         {
             Instance = this;
         }
+        #endregion
         #region Variables Assign
 
         aInput = new AccelerateInput();
@@ -219,12 +218,11 @@ public class MoveTest : MonoBehaviour
         actualBoostSpeed = boostTrailSpeed;
 
         #endregion
-
     }
+    #endregion
 
     private void Update()
     {
-
         #region Raycast For Secondaryshot
 
         secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);

@@ -25,15 +25,23 @@ public class Shoot : MonoBehaviour
     private GameObject nug;
     private GameObject target;
 
-    [Header("Balle")]
+    [Header("Game Objects")]
     [Space(10)]
     [Tooltip("Balle")]
     public GameObject bullet;
+
+    [Space(10)]
+    [Tooltip("Un objet vite a rajouter pour reset les locks")]
+    public GameObject empty;
 
     #region Shot Variables
     private Vector3 secondaryShotAim;
     private bool activateSecondaryTimer;
     private float secondaryTimer = 0f;
+
+    private int ennemyIdx;
+
+    private GameObject[] ennemy;
 
     private bool secondaryShot;
 
@@ -75,6 +83,41 @@ public class Shoot : MonoBehaviour
             if( Hit.collider.CompareTag("Enemy") )
                         {
                             Debug.Log("Touché en secondaire");
+                           switch (ennemyIdx) {
+                               case 0 :
+                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                   {
+                                       ennemy[0] = Hit.collider.gameObject;
+                                   }
+                                   break;
+                                case 1 :
+                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                   {
+                                       ennemy[1] = Hit.collider.gameObject;
+                                   }
+                                   break;
+                                case 2 :
+                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                   {
+                                       ennemy[2] = Hit.collider.gameObject;
+                                   }
+                                   break;
+                                case 3 :
+                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                   {
+                                       ennemy[3] = Hit.collider.gameObject;
+                                   }
+                                   break;
+                                case 4 :
+                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                   {
+                                       ennemy[4] = Hit.collider.gameObject;
+                                   }
+                                   break;
+                               default :
+                                   
+                                   break;
+                           }
                         }
         }
         #endregion
@@ -93,8 +136,27 @@ public class Shoot : MonoBehaviour
         {
             activateSecondaryTimer = false;
             secondaryTimer = 0f;
+            if(secondaryShot = true){
+
             secondaryShot = false;
+            SecondaryShot();
+
+
+
+            ennemy[0] = empty;
+            ennemy[1] = empty;
+            ennemy[2] = empty;
+            ennemy[3] = empty;
+            ennemy[4] = empty;
+
+            }
+
         }
+    }
+
+    public void SecondaryShot()
+    {
+
     }
 }
 

@@ -15,7 +15,7 @@ public class Shoot : MonoBehaviour
     private void Awake() 
     {
         ray = transform.GetChild(0).gameObject;
-        nug = ray.transform.GetChild(4).gameObject;
+        nug = ray.transform.GetChild(5).gameObject;
         target = ray.transform.GetChild(0).gameObject;
     }
     private void Start() 

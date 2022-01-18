@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     private void Awake() 
     {
         spawned = false;
-        player = MoveTest.Instance.gameObject;
+        player = MoveTest.Instance.gameObject.transform.GetChild(0).GetChild(1).gameObject;
         enemyCart = gameObject.transform.GetChild(0).gameObject;
         gameObject.SetActive(false);
     }
@@ -31,20 +31,17 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private void Update() 
     {
-        Vector3 dir = player.transform.position - enemyCart.transform.position;
-        Quaternion shootDir = Quaternion.LookRotation(dir, enemyCart.transform.InverseTransformDirection(enemyCart.transform.up));
         if(spawned)
         {
             if(!isShooting)
             {
                 isShooting = true;
-                Debug.Log("piou");
-                StartCoroutine(shootToPlayer(shootDir));
+                StartCoroutine(shootToPlayer());
             }
         }
         else
         {
-            StopCoroutine(shootToPlayer(shootDir));
+            StopCoroutine(shootToPlayer());
             isShooting = false; 
         }
     }
@@ -58,11 +55,13 @@ public class Enemy : MonoBehaviour, IPooledObject
         }
     }
 
-    private IEnumerator shootToPlayer(Quaternion shootDir)
+    private IEnumerator shootToPlayer()
     {
 
-        yield return new WaitForSeconds(1f);    
+        yield return new WaitForSeconds(shootingCD);    
         //tirer vers le player
+        Vector3 dir = player.transform.position - enemyCart.transform.position;
+        Quaternion shootDir = Quaternion.LookRotation(dir, enemyCart.transform.InverseTransformDirection(enemyCart.transform.up));
         Instantiate(enemyProjectile, enemyCart.transform.position, shootDir);    
         isShooting = false;    
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullets : MonoBehaviour, IPooledObject
+public class Bullets : MonoBehaviour
 {
     [Header("Paramètres de la balle")]
     [Space(10)]
@@ -15,31 +15,21 @@ public class Bullets : MonoBehaviour, IPooledObject
 
     Vector3 velocity = Vector3.forward;
 
-    private bool shooted;
 
     private void Awake() 
     {
-        shooted = false;
-    }
-
-    public void OnObjectSpawn()
-    {
-        shooted = true;
         travelledDistance = 0f;
     }
 
     private void Update() 
     {
-        if(shooted)
+        Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
+        transform.position += transform.TransformDirection(velMetersPerFrame);
+        travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
+        if(travelledDistance > bulletRange)
         {
-            Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
-            transform.position += transform.TransformDirection(velMetersPerFrame);
-            travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
-            if(travelledDistance > bulletRange)
-            {
-                Destroy(gameObject);
-                shooted = false;
-            }
+            Destroy(gameObject);
         }
+
     }
 }

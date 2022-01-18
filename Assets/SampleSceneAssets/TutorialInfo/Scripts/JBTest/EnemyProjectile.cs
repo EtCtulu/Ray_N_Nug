@@ -17,7 +17,6 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Update() 
     {
-
         Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
         transform.position += transform.TransformDirection(velMetersPerFrame);
         travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;

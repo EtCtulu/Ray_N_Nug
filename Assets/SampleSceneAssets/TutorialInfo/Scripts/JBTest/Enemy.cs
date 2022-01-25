@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Enemy : MonoBehaviour, IPooledObject
 {
@@ -16,6 +17,9 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private bool isShooting = false;
 
+    public CinemachinePathBase goingPath;
+    public CinemachinePathBase startingPath;
+
     private void Awake() 
     {
         spawned = false;
@@ -23,9 +27,13 @@ public class Enemy : MonoBehaviour, IPooledObject
         enemyCart = gameObject.transform.GetChild(0).gameObject;
         gameObject.SetActive(false);
     }
+
     public void OnObjectSpawn()
     {
         spawned = true;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Path = startingPath;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 10f;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
         gameObject.SetActive(true);
     }
 
@@ -33,6 +41,12 @@ public class Enemy : MonoBehaviour, IPooledObject
     {
         if(spawned)
         {
+            if(enemyCart.GetComponent<CinemachineDollyCart>().m_Position == enemyCart.GetComponent<CinemachineDollyCart>().m_Path.PathLength)
+            {
+                enemyCart.GetComponent<CinemachineDollyCart>().m_Path = goingPath;
+                enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+                gameObject.transform.SetParent(null);
+            }
             if(!isShooting)
             {
                 isShooting = true;
@@ -42,6 +56,7 @@ public class Enemy : MonoBehaviour, IPooledObject
         else
         {
             StopCoroutine(shootToPlayer());
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
             isShooting = false; 
         }
     }
@@ -57,7 +72,6 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private IEnumerator shootToPlayer()
     {
-
         yield return new WaitForSeconds(shootingCD);    
         //tirer vers le player
         Vector3 dir = player.transform.position - enemyCart.transform.position;

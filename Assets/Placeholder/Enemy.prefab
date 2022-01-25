@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930802056429657272}
-  m_LocalRotation: {x: -0.27066708, y: -0.6532529, z: -0.27066708, w: 0.6532529}
+  m_LocalRotation: {x: -0.14329745, y: 0.6924347, z: 0.14329745, w: 0.6924347}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4412839478829906189}
   - component: {fileID: 8078759095377148572}
   m_Layer: 0
-  m_Name: DollyTrack2
+  m_Name: StraightPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,15 +161,15 @@ MonoBehaviour:
     pathColor: {r: 0, g: 1, b: 0, a: 1}
     inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     width: 0.2
-  m_Looped: 1
+  m_Looped: 0
   m_Waypoints:
   - position: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: 0, y: 10, z: 0}
+  - position: {x: 10.03714, y: 4.205535, z: 0}
     roll: 0
-  - position: {x: 10, y: 10, z: 0}
+  - position: {x: 21.07763, y: 6.413541, z: 0}
     roll: 0
-  - position: {x: 10, y: 0, z: 0}
+  - position: {x: 30, y: 0, z: 0}
     roll: 0
 --- !u!1 &4590148665847699251
 GameObject:
@@ -201,6 +201,7 @@ Transform:
   m_Children:
   - {fileID: 6773268510756037701}
   - {fileID: 4412839478829906189}
+  - {fileID: 554478262859012792}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -218,4 +219,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawned: 0
   enemyProjectile: {fileID: 7387046424180439169, guid: 12e593af07c476f4cac82f8a93acd234, type: 3}
-  shootingCD: 1
+  shootingCD: 1.5
+  goingPath: {fileID: 7374651778272438149}
+  startingPath: {fileID: 8078759095377148572}
+--- !u!1 &9185546787260055558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554478262859012792}
+  - component: {fileID: 7374651778272438149}
+  m_Layer: 0
+  m_Name: LoopPath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &554478262859012792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185546787260055558}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3304581234020482283}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7374651778272438149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185546787260055558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200b19ca1a9685429ed7e043c28e904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 1
+  m_Waypoints:
+  - position: {x: 0, y: 0, z: 0}
+    roll: 0
+  - position: {x: 10, y: 0, z: 0}
+    roll: 0
+  - position: {x: 10, y: 10, z: 0}
+    roll: 0
+  - position: {x: 0, y: 10, z: 0}
+    roll: 0

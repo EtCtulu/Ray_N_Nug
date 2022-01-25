@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 179368754}
   spawnCD: 0.3
-  stoppingTimer: 6
+  stoppingTimer: 5.5
   enemiesToSpawn: 5
   enemiesSpawned: []
 --- !u!23 &1664441083
@@ -2180,63 +2180,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855663763}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1940579451
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 34.870407
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.876105
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -21.92203
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304581234020482283, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590148665847699251, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ec5224578aa3bca4784780ca89c2b0b7, type: 3}
 --- !u!1 &1979144993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: df13acb485718064898c3d2fa0de7c6b, type: 3}
@@ -2402,19 +2345,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 179368755, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.5
+      value: -69.7
       objectReference: {fileID: 0}
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -7.613033e-22
+      value: 5.024296e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2456305300224714019, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.5751242e-22
+      value: 5.024296e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2536164074260013808, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_Size.x

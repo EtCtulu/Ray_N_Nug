@@ -7,18 +7,19 @@ public class Enemy : MonoBehaviour, IPooledObject
 {
     [HideInInspector]
     public bool spawned;
-    private GameObject enemyCart;
+
+    [HideInInspector]
+    public GameObject enemyCart;
 
     private GameObject player;
 
     public GameObject enemyProjectile;
 
-    public float shootingCD = 1f;
+    public float shootingCD = 3f;
+
+    public float movingSpeed = 15f;
 
     private bool isShooting = false;
-
-    public CinemachinePathBase goingPath;
-    public CinemachinePathBase startingPath;
 
     private void Awake() 
     {
@@ -31,8 +32,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         spawned = true;
-        enemyCart.GetComponent<CinemachineDollyCart>().m_Path = startingPath;
-        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 10f;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;
         enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
         gameObject.SetActive(true);
     }
@@ -41,13 +41,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     {
         if(spawned)
         {
-            if(enemyCart.GetComponent<CinemachineDollyCart>().m_Position == enemyCart.GetComponent<CinemachineDollyCart>().m_Path.PathLength)
-            {
-                enemyCart.GetComponent<CinemachineDollyCart>().m_Path = goingPath;
-                enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
-                gameObject.transform.SetParent(null);
-            }
-            if(!isShooting)
+            if(!isShooting && enemyCart.GetComponent<CinemachineDollyCart>().m_Speed == 0f)
             {
                 isShooting = true;
                 StartCoroutine(shootToPlayer());
@@ -56,8 +50,12 @@ public class Enemy : MonoBehaviour, IPooledObject
         else
         {
             StopCoroutine(shootToPlayer());
-            enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;
             isShooting = false; 
+            if(enemyCart.GetComponent<CinemachineDollyCart>().m_Position == enemyCart.GetComponent<CinemachineDollyCart>().m_Path.PathLength)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -72,11 +70,11 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private IEnumerator shootToPlayer()
     {
-        yield return new WaitForSeconds(shootingCD);    
+        yield return new WaitForSeconds(shootingCD);   
         //tirer vers le player
         Vector3 dir = player.transform.position - enemyCart.transform.position;
         Quaternion shootDir = Quaternion.LookRotation(dir, enemyCart.transform.InverseTransformDirection(enemyCart.transform.up));
         Instantiate(enemyProjectile, enemyCart.transform.position, shootDir);    
-        isShooting = false;    
+        isShooting = false; 
     }
 }

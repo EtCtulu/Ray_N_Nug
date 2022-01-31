@@ -64,7 +64,12 @@ public class Enemy : MonoBehaviour, IPooledObject
         if (other.CompareTag("Bullet"))
         {
             other.gameObject.transform.position = new Vector3 (0, -10000, 0);
+            StopCoroutine(shootToPlayer());
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
             gameObject.transform.position = new Vector3(0, -12000, 0);
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+            spawned = false;
+            gameObject.SetActive(false);
         }
     }
 

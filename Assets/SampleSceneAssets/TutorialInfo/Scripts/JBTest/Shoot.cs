@@ -32,7 +32,7 @@ public class Shoot : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Un objet vite a rajouter pour reset les locks")]
-    public GameObject empty;
+    //public GameObject empty;
 
     #region Shot Variables
     private Vector3 secondaryShotAim;
@@ -136,18 +136,15 @@ public class Shoot : MonoBehaviour
         {
             activateSecondaryTimer = false;
             secondaryTimer = 0f;
-            if(secondaryShot = true){
-
-            secondaryShot = false;
-            SecondaryShot();
-
-
-
-            ennemy[0] = empty;
-            ennemy[1] = empty;
-            ennemy[2] = empty;
-            ennemy[3] = empty;
-            ennemy[4] = empty;
+            if(secondaryShot)
+            {
+                secondaryShot = false;
+                SecondaryShot();
+                ennemy[0] = null;
+                ennemy[1] = null;
+                ennemy[2] = null;
+                ennemy[3] = null;
+                ennemy[4] = null;
 
             }
 

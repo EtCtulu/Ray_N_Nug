@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class Enemy : MonoBehaviour, IPooledObject
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool spawned;
 
     [HideInInspector]
@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         spawned = true;
-        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;
+        isShooting = false;
         enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;   
         gameObject.SetActive(true);
     }
 
@@ -59,14 +60,19 @@ public class Enemy : MonoBehaviour, IPooledObject
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    /*private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Bullet"))
         {
             other.gameObject.transform.position = new Vector3 (0, -10000, 0);
+            StopCoroutine(shootToPlayer());
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
             gameObject.transform.position = new Vector3(0, -12000, 0);
+            enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+            spawned = false;
+            gameObject.SetActive(false);
         }
-    }
+    }*/
 
     private IEnumerator shootToPlayer()
     {

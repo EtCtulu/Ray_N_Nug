@@ -19,7 +19,7 @@ public class Shoot : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Portée du raycast de secondary shot")]
-    public float range = 1000f;
+    public float range = 10000f;
 
     private GameObject ray;
     private GameObject nug;
@@ -32,16 +32,16 @@ public class Shoot : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Un objet vite a rajouter pour reset les locks")]
-    public GameObject empty;
+    //public GameObject empty;
 
     #region Shot Variables
     private Vector3 secondaryShotAim;
     private bool activateSecondaryTimer;
     private float secondaryTimer = 0f;
 
-    private int ennemyIdx;
+    private int ennemyIdx = 0;
 
-    private GameObject[] ennemy;
+    public GameObject[] ennemy = new GameObject[5];
 
     private bool secondaryShot;
 
@@ -74,8 +74,10 @@ public class Shoot : MonoBehaviour
 
         #region Raycast For Secondaryshot
 
+        if(secondaryShot){
+
         secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 50, Color.green);
+        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.red);
 
         RaycastHit Hit;
         if( Physics.Raycast(transform.position, secondaryShotAim, out Hit, range) && secondaryShot)
@@ -88,30 +90,35 @@ public class Shoot : MonoBehaviour
                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
                                    {
                                        ennemy[0] = Hit.collider.gameObject;
+                                       ennemyIdx++;
                                    }
                                    break;
                                 case 1 :
                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
                                    {
                                        ennemy[1] = Hit.collider.gameObject;
+                                       ennemyIdx++;
                                    }
                                    break;
                                 case 2 :
                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
                                    {
                                        ennemy[2] = Hit.collider.gameObject;
+                                       ennemyIdx++;
                                    }
                                    break;
                                 case 3 :
                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
                                    {
                                        ennemy[3] = Hit.collider.gameObject;
+                                       ennemyIdx++;
                                    }
                                    break;
                                 case 4 :
                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
                                    {
                                        ennemy[4] = Hit.collider.gameObject;
+                                       ennemyIdx++;
                                    }
                                    break;
                                default :
@@ -121,6 +128,7 @@ public class Shoot : MonoBehaviour
                         }
         }
         #endregion
+        }
     }
 
     public void Shooting(InputAction.CallbackContext context)
@@ -136,18 +144,16 @@ public class Shoot : MonoBehaviour
         {
             activateSecondaryTimer = false;
             secondaryTimer = 0f;
-            if(secondaryShot = true){
-
-            secondaryShot = false;
-            SecondaryShot();
-
-
-
-            ennemy[0] = empty;
-            ennemy[1] = empty;
-            ennemy[2] = empty;
-            ennemy[3] = empty;
-            ennemy[4] = empty;
+            if(secondaryShot)
+            {
+                secondaryShot = false;
+                SecondaryShot();
+                ennemyIdx = 0;
+                ennemy[0] = null;
+                ennemy[1] = null;
+                ennemy[2] = null;
+                ennemy[3] = null;
+                ennemy[4] = null;
 
             }
 

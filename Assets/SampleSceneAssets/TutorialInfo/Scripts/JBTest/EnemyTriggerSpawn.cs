@@ -50,7 +50,7 @@ public class EnemyTriggerSpawn : MonoBehaviour
         {
             foreach(GameObject despawn in enemiesSpawned)
             {
-                despawn.GetComponent<Enemy>().spawned = false;
+                despawn.GetComponent<Enemy>().spawned = false;            
             }
             enemiesSpawned.Clear();
         }

@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class Enemy : MonoBehaviour, IPooledObject
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool spawned;
 
     [HideInInspector]
@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         spawned = true;
-        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;
+        isShooting = false;
         enemyCart.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+        enemyCart.GetComponent<CinemachineDollyCart>().m_Speed = movingSpeed;   
         gameObject.SetActive(true);
     }
 

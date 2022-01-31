@@ -11,10 +11,10 @@ public class EnemyHBox : MonoBehaviour
         {
             gameObject.GetComponentInParent<Enemy>().spawned = false;
             other.gameObject.transform.position = new Vector3 (0, -10000, 0);
-            gameObject.GetComponentInParent<CinemachineDollyCart>().m_Speed = 0f;
-            gameObject.transform.position = new Vector3(0, -12000, 0);
-            gameObject.GetComponentInParent<CinemachineDollyCart>().m_Position = 0f;
-            gameObject.SetActive(false);
+            gameObject.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
+            gameObject.GetComponentInParent<Enemy>().transform.position = new Vector3(0, -12000, 0);
+            gameObject.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+            gameObject.GetComponentInParent<Enemy>().gameObject.SetActive(false);
         }
     }
 }

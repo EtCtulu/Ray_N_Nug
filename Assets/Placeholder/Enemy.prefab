@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4298933342658463732}
   - component: {fileID: 8846471734739843786}
+  - component: {fileID: 8989093252872902870}
+  - component: {fileID: 695152253253392597}
   m_Layer: 0
   m_Name: Cart
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +51,32 @@ MonoBehaviour:
   m_PositionUnits: 1
   m_Speed: 0
   m_Position: 0
+--- !u!136 &8989093252872902870
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946009177559271203}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.12
+  m_Height: 6.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &695152253253392597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946009177559271203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706cd95e32486814a9ec0f92f0a9853a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3502215154514301500
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,8 +88,6 @@ GameObject:
   - component: {fileID: 4310383051279485062}
   - component: {fileID: 900250543521253155}
   - component: {fileID: 3142002157033567209}
-  - component: {fileID: 6708314531710884352}
-  - component: {fileID: 24176252333196614}
   m_Layer: 0
   m_Name: hipo_text
   m_TagString: Untagged
@@ -132,32 +158,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6708314531710884352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3502215154514301500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706cd95e32486814a9ec0f92f0a9853a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &24176252333196614
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3502215154514301500}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.024981044
-  m_Height: 0.06624398
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.005545273, z: 0.0032539028}
 --- !u!1 &3859273750716378554
 GameObject:
   m_ObjectHideFlags: 0

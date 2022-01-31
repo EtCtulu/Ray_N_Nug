@@ -41,7 +41,7 @@ public class Shoot : MonoBehaviour
 
     private int ennemyIdx;
 
-    private GameObject[] ennemy;
+    public GameObject[] ennemy = new GameObject[5];
 
     private bool secondaryShot;
 

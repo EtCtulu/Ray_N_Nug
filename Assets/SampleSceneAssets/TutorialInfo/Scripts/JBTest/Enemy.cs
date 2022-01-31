@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour, IPooledObject
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    /*private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Bullet"))
         {
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour, IPooledObject
             spawned = false;
             gameObject.SetActive(false);
         }
-    }
+    }*/
 
     private IEnumerator shootToPlayer()
     {

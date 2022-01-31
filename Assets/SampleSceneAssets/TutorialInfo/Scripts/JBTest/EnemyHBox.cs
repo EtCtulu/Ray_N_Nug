@@ -9,11 +9,11 @@ public class EnemyHBox : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            gameObject.GetComponent<CinemachineDollyCart>().m_Position = gameObject.GetComponent<CinemachineDollyCart>().m_Path.PathLength;
             gameObject.GetComponentInParent<Enemy>().spawned = false;
-            other.gameObject.transform.position = new Vector3 (0, -10000, 0);
+            Destroy(other);
             gameObject.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
-            gameObject.GetComponentInParent<Enemy>().transform.position = new Vector3(0, -12000, 0);
-            gameObject.GetComponent<CinemachineDollyCart>().m_Position = 0f;
+            gameObject.GetComponentInParent<Enemy>().transform.position = new Vector3(0, -12000, 0); 
             gameObject.GetComponentInParent<Enemy>().gameObject.SetActive(false);
         }
     }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3057685504363350327}
   m_Layer: 0
   m_Name: EnemyBulletPH
-  m_TagString: Enemy
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,4 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 30
-  bulletRange: 100
+  bulletRange: 1000
+  velocity: {x: 0, y: 0, z: 1}

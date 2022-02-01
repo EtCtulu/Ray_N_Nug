@@ -13,7 +13,13 @@ public class EnemyProjectile : MonoBehaviour
 
     private float travelledDistance;
 
-    Vector3 velocity = Vector3.forward;
+    [HideInInspector]
+    public Vector3 velocity = Vector3.forward;
+
+    private void Awake() 
+    {
+        travelledDistance = 0f;
+    }
 
     private void Update() 
     {

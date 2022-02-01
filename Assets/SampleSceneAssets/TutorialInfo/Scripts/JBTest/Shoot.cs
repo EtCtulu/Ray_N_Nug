@@ -70,16 +70,17 @@ public class Shoot : MonoBehaviour
 
         #region Raycast For Secondaryshot
 
+        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.green);
+
         if(secondaryShot){
 
         secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.red);
 
         RaycastHit Hit;
-        if( Physics.Raycast(transform.position, secondaryShotAim, out Hit, range) && secondaryShot)
+        if( Physics.Raycast(characterModel.transform.position, secondaryShotAim, out Hit, range) && secondaryShot && Hit.transform.tag == "Enemy")
         {
-            if( Hit.collider.CompareTag("Enemy") )
-                        {
+            
                             Debug.Log("Touché en secondaire");
                            switch (ennemyIdx) {
                                case 0 :
@@ -121,7 +122,7 @@ public class Shoot : MonoBehaviour
                                    
                                    break;
                            }
-                        }
+                        
         }
         #endregion
         }

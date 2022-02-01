@@ -57,6 +57,22 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""BarrelRoll"",
+                    ""type"": ""Button"",
+                    ""id"": ""e41edfd7-d784-46ba-8463-ccade2e8bb76"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rocket"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bbdbb1f-1b92-4f36-8531-9d7c42d31869"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -118,7 +134,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c4f0e4a5-f435-43bf-89f2-89e9a83b78eb"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,19 +144,8 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4f6b2a64-5736-4832-b3ad-25911b9ec5ac"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SlowDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""44fb97eb-4ae4-4677-9827-36e92ff3a5b1"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -150,12 +155,34 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""782f80fd-56a7-418e-8b05-cf6c0f18c58b"",
+                    ""id"": ""35e22942-0c53-4b0b-84a7-50b96307d664"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Strafe"",
+                    ""action"": ""BarrelRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0130e09-f228-4b21-9354-d464c9cf392f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BarrelRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5585d54-8295-4482-9cbe-8e229b61a450"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rocket"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -171,6 +198,8 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         m_Accelerate_SlowDown = m_Accelerate.FindAction("SlowDown", throwIfNotFound: true);
         m_Accelerate_Shoot = m_Accelerate.FindAction("Shoot", throwIfNotFound: true);
         m_Accelerate_Strafe = m_Accelerate.FindAction("Strafe", throwIfNotFound: true);
+        m_Accelerate_BarrelRoll = m_Accelerate.FindAction("BarrelRoll", throwIfNotFound: true);
+        m_Accelerate_Rocket = m_Accelerate.FindAction("Rocket", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +254,8 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Accelerate_SlowDown;
     private readonly InputAction m_Accelerate_Shoot;
     private readonly InputAction m_Accelerate_Strafe;
+    private readonly InputAction m_Accelerate_BarrelRoll;
+    private readonly InputAction m_Accelerate_Rocket;
     public struct AccelerateActions
     {
         private @AccelerateInput m_Wrapper;
@@ -234,6 +265,8 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         public InputAction @SlowDown => m_Wrapper.m_Accelerate_SlowDown;
         public InputAction @Shoot => m_Wrapper.m_Accelerate_Shoot;
         public InputAction @Strafe => m_Wrapper.m_Accelerate_Strafe;
+        public InputAction @BarrelRoll => m_Wrapper.m_Accelerate_BarrelRoll;
+        public InputAction @Rocket => m_Wrapper.m_Accelerate_Rocket;
         public InputActionMap Get() { return m_Wrapper.m_Accelerate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +291,12 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @Strafe.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnStrafe;
                 @Strafe.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnStrafe;
                 @Strafe.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnStrafe;
+                @BarrelRoll.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
+                @BarrelRoll.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
+                @BarrelRoll.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
+                @Rocket.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
+                @Rocket.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
+                @Rocket.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
             }
             m_Wrapper.m_AccelerateActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +316,12 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @Strafe.started += instance.OnStrafe;
                 @Strafe.performed += instance.OnStrafe;
                 @Strafe.canceled += instance.OnStrafe;
+                @BarrelRoll.started += instance.OnBarrelRoll;
+                @BarrelRoll.performed += instance.OnBarrelRoll;
+                @BarrelRoll.canceled += instance.OnBarrelRoll;
+                @Rocket.started += instance.OnRocket;
+                @Rocket.performed += instance.OnRocket;
+                @Rocket.canceled += instance.OnRocket;
             }
         }
     }
@@ -288,5 +333,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         void OnSlowDown(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnStrafe(InputAction.CallbackContext context);
+        void OnBarrelRoll(InputAction.CallbackContext context);
+        void OnRocket(InputAction.CallbackContext context);
     }
 }

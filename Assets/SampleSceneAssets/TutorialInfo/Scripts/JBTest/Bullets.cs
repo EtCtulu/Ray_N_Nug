@@ -13,8 +13,8 @@ public class Bullets : MonoBehaviour
 
     private float travelledDistance;
 
-    Vector3 velocity = Vector3.forward;
-
+    [HideInInspector]
+    public Vector3 velocity = Vector3.forward;
 
     private void Awake() 
     {

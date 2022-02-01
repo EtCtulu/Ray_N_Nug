@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     private void Awake() 
     {
         spawned = false;
-        player = MoveTest.Instance.gameObject.transform.GetChild(0).GetChild(1).gameObject;
+        player = MoveTest.Instance.gameObject.transform.GetChild(0).GetChild(2).gameObject;
         enemyCart = gameObject.transform.GetChild(0).gameObject;
         gameObject.SetActive(false);
     }

@@ -183,8 +183,24 @@ public class MoveTest : MonoBehaviour
 
     #endregion
 
-    //private Vector3 currentEulerAngles;
-    //private Quaternion currentRotation; 
+    #region Barrel Roll Variables
+
+    private GameObject BarrelHBox;
+
+    private bool canBRoll = true;
+
+    [Header("Tonneau")]
+    [Range(0,3)]
+    [Tooltip("La durée pendant laquelle le joueur effectue son tonneau")]
+    public float barrelRollDuration = 1f;
+
+    [Range(0,3)]
+    [Tooltip("La durée pendant laquelle le joueur ne peut plus effectuer de tonneaux")]
+    public float barrelRollCD = 0.5f;
+
+    #endregion
+
+
     
     #region Awake
     public static MoveTest Instance;
@@ -205,6 +221,7 @@ public class MoveTest : MonoBehaviour
 
         aInput = new AccelerateInput();
         rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
+        BarrelHBox = rbCharacter.transform.GetChild(1).gameObject;
         rbCharacterTransform = rbCharacter.transform;
         actualBoostSpeed = boostTrailSpeed;
 
@@ -278,6 +295,12 @@ public class MoveTest : MonoBehaviour
         
         rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
 
+        isMoving = true;
+        if(context.canceled)
+        {
+            isMoving = false;
+        }
+
         //rbCharacterTransform.localRotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f), .1f);
     }
 
@@ -330,28 +353,29 @@ public class MoveTest : MonoBehaviour
 
     public void Strafe(InputAction.CallbackContext context)
     {
-        if(context.performed){
-        if(sideSecurity)
+        if(context.performed && isMoving)
         {
-            Debug.Log("Non");
-            return;
-        }
-        if(canSideDash)
-        {
-            Debug.Log("SideDASH SPEEEEED");
-            strafeSpeed = strafeSpeed * strafeSpeedMultiply;
-            sideSecurity = true;
-            Invoke("ResetSpeed", sideBoostDuration);
-            return;
-        }
-        Debug.Log("Initial Strafe");
-        isInvicible = true;
-        shotsDismissal = true;
-        canSideDash = true;
-        Invoke("DeactivateDismissal", dismissalDuration);
-        Invoke("DeactivateSideDash", sideBoostWindowDuration);
-        Invoke("DeactivateInvicible", dashInvicibilityDuration);
-        Invoke("CooldownSideDash", sideDashCooldown);
+            if(sideSecurity)
+            {
+                Debug.Log("Non");
+                return;
+            }
+            if(canSideDash)
+            {
+                Debug.Log("SideDASH SPEEEEED");
+                strafeSpeed = strafeSpeed * strafeSpeedMultiply;
+                sideSecurity = true;
+                Invoke("ResetSpeed", sideBoostDuration);
+                return;
+            }
+            Debug.Log("Initial Strafe");
+            isInvicible = true;
+            shotsDismissal = true;
+            canSideDash = true;
+            Invoke("DeactivateDismissal", dismissalDuration);
+            Invoke("DeactivateSideDash", sideBoostWindowDuration);
+            Invoke("DeactivateInvicible", dashInvicibilityDuration);
+            Invoke("CooldownSideDash", sideDashCooldown);
         }
     }
 
@@ -379,6 +403,31 @@ public class MoveTest : MonoBehaviour
     public void CooldownSideDash()
     {
         sideSecurity = false;
+    }
+
+    #endregion
+
+    #region Barrel Roll
+
+    public void BRoll(InputAction.CallbackContext context)
+    {
+        if(context.performed && canBRoll)
+        {
+            BarrelHBox.SetActive(true);
+            canBRoll = false;
+            Invoke("EndBRoll", 1f);
+            Invoke("CooldownBarrelRoll", barrelRollCD);
+        }
+    }
+
+    public void EndBRoll()
+    {
+        BarrelHBox.SetActive(false);
+    }
+
+    public void CooldownBarrelRoll()
+    {
+        canBRoll = true;
     }
 
     #endregion

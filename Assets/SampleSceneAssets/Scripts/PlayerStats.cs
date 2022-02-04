@@ -20,6 +20,19 @@ public class PlayerStats : MonoBehaviour
     [Tooltip("Le nombre d'ennemis lock, un int")]
     public int lockNumber = 0;
 
+    [Header("Variables Gain de boost pour 1 ennemi tue")]
+    [Space(10)]
+    [Tooltip("Le gain de boost d'un kill seul")]
+    public float singleBoostGain = 0;
+
+    [Header("Variables Gain de boost pour ennemi lock")]
+    [Space(10)]
+    public float singleLockBoostGain = 0;
+    public float twoLockBoostGain = 0;
+    public float threeLockBoostGain = 0;
+    public float fourLockBoostGain = 0;
+    public float fiveLockBoostGain = 0;
+
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
@@ -33,5 +46,39 @@ public class PlayerStats : MonoBehaviour
     public void GetBomb()
     {
         playerBombs++;
+    }
+
+    public void SingleBoostGain()
+    {
+        playerBoost += singleBoostGain;
+        playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+    }
+    public void LockBoostGain(int lockNumber)
+    {
+       switch (lockNumber) {
+           case 0:
+                playerBoost += singleLockBoostGain;
+                playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+               break;
+            case 1:
+                playerBoost += twoLockBoostGain;
+                playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+               break;
+            case 2:
+                playerBoost += threeLockBoostGain;
+                playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+               break;
+            case 3:
+                playerBoost += fourLockBoostGain;
+                playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+               break;
+            case 4:
+                playerBoost += fiveLockBoostGain;
+                playerBoost = Mathf.Clamp(playerBoost, 0, 100);
+               break;
+           default :
+               
+               break;
+       }
     }
 }

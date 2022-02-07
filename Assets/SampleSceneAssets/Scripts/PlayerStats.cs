@@ -33,6 +33,10 @@ public class PlayerStats : MonoBehaviour
     public float fourLockBoostGain = 0;
     public float fiveLockBoostGain = 0;
 
+    [Header("Movetest")]
+    [Space(10)]
+    public MoveTest moveTest;
+
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;

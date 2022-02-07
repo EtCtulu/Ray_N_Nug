@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - EnemyBullet
   - Bomb
+  - Obstacle
   layers:
   - Default
   - TransparentFX

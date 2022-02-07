@@ -5,7 +5,11 @@ using Cinemachine;
 
 public class EnemyHBox : MonoBehaviour
 {
-   private void OnTriggerEnter(Collider other) 
+
+    private bool startDestroy = false;
+    private GameObject bomb;
+
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Bullet"))
         {
@@ -16,5 +20,31 @@ public class EnemyHBox : MonoBehaviour
             gameObject.GetComponentInParent<Enemy>().transform.position = new Vector3(0, -12000, 0); 
             gameObject.GetComponentInParent<Enemy>().gameObject.SetActive(false);
         }
+        else if (other.CompareTag("Bomb"))
+        {
+            bomb = other.gameObject; 
+            startDestroy = true;
+            other.GetComponent<ShrimpBomb>().bombSpeed = 0f;
+            other.transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
+    private void Update() 
+    {
+        if(startDestroy)
+        {
+            gameObject.GetComponent<CinemachineDollyCart>().m_Position = gameObject.GetComponent<CinemachineDollyCart>().m_Path.PathLength;
+            gameObject.GetComponentInParent<Enemy>().spawned = false;
+            gameObject.GetComponent<CinemachineDollyCart>().m_Speed = 0f;
+            gameObject.GetComponentInParent<Enemy>().transform.position = new Vector3(0, -12000, 0); 
+            gameObject.GetComponentInParent<Enemy>().gameObject.SetActive(false);
+            Invoke("DestroyBomb", 1f);
+        }
+    }
+
+    public void DestroyBomb()
+    {
+        Destroy(bomb);
+        startDestroy = false;
     }
 }

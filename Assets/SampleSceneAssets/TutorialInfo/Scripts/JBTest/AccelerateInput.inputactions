@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Rocket",
+                    "name": "BombeCrevette",
                     "type": "Button",
                     "id": "9bbdbb1f-1b92-4f36-8531-9d7c42d31869",
                     "expectedControlType": "Button",
@@ -169,7 +169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rocket",
+                    "action": "BombeCrevette",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

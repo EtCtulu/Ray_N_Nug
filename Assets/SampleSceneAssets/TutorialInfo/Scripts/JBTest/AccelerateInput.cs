@@ -67,7 +67,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Rocket"",
+                    ""name"": ""BombeCrevette"",
                     ""type"": ""Button"",
                     ""id"": ""9bbdbb1f-1b92-4f36-8531-9d7c42d31869"",
                     ""expectedControlType"": ""Button"",
@@ -182,7 +182,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rocket"",
+                    ""action"": ""BombeCrevette"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -221,7 +221,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         m_Accelerate_Shoot = m_Accelerate.FindAction("Shoot", throwIfNotFound: true);
         m_Accelerate_Strafe = m_Accelerate.FindAction("Strafe", throwIfNotFound: true);
         m_Accelerate_BarrelRoll = m_Accelerate.FindAction("BarrelRoll", throwIfNotFound: true);
-        m_Accelerate_Rocket = m_Accelerate.FindAction("Rocket", throwIfNotFound: true);
+        m_Accelerate_BombeCrevette = m_Accelerate.FindAction("BombeCrevette", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -277,7 +277,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Accelerate_Shoot;
     private readonly InputAction m_Accelerate_Strafe;
     private readonly InputAction m_Accelerate_BarrelRoll;
-    private readonly InputAction m_Accelerate_Rocket;
+    private readonly InputAction m_Accelerate_BombeCrevette;
     public struct AccelerateActions
     {
         private @AccelerateInput m_Wrapper;
@@ -288,7 +288,7 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Accelerate_Shoot;
         public InputAction @Strafe => m_Wrapper.m_Accelerate_Strafe;
         public InputAction @BarrelRoll => m_Wrapper.m_Accelerate_BarrelRoll;
-        public InputAction @Rocket => m_Wrapper.m_Accelerate_Rocket;
+        public InputAction @BombeCrevette => m_Wrapper.m_Accelerate_BombeCrevette;
         public InputActionMap Get() { return m_Wrapper.m_Accelerate; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -316,9 +316,9 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @BarrelRoll.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
                 @BarrelRoll.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
                 @BarrelRoll.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBarrelRoll;
-                @Rocket.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
-                @Rocket.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
-                @Rocket.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnRocket;
+                @BombeCrevette.started -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBombeCrevette;
+                @BombeCrevette.performed -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBombeCrevette;
+                @BombeCrevette.canceled -= m_Wrapper.m_AccelerateActionsCallbackInterface.OnBombeCrevette;
             }
             m_Wrapper.m_AccelerateActionsCallbackInterface = instance;
             if (instance != null)
@@ -341,9 +341,9 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
                 @BarrelRoll.started += instance.OnBarrelRoll;
                 @BarrelRoll.performed += instance.OnBarrelRoll;
                 @BarrelRoll.canceled += instance.OnBarrelRoll;
-                @Rocket.started += instance.OnRocket;
-                @Rocket.performed += instance.OnRocket;
-                @Rocket.canceled += instance.OnRocket;
+                @BombeCrevette.started += instance.OnBombeCrevette;
+                @BombeCrevette.performed += instance.OnBombeCrevette;
+                @BombeCrevette.canceled += instance.OnBombeCrevette;
             }
         }
     }
@@ -356,6 +356,6 @@ public class @AccelerateInput : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnStrafe(InputAction.CallbackContext context);
         void OnBarrelRoll(InputAction.CallbackContext context);
-        void OnRocket(InputAction.CallbackContext context);
+        void OnBombeCrevette(InputAction.CallbackContext context);
     }
 }

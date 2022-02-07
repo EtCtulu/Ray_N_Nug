@@ -30,6 +30,9 @@ public class Shoot : MonoBehaviour
     [Tooltip("Balle")]
     public GameObject bullet;
 
+    [Tooltip("Bombe Crevette")]
+    public GameObject bombShrimp;
+
     [Space(10)]
     [Tooltip("Un objet vite a rajouter pour reset les locks")]
     //public GameObject empty;
@@ -160,6 +163,16 @@ public class Shoot : MonoBehaviour
     public void SecondaryShot()
     {
 
+    }
+
+    public void Bomb(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Vector3 dir = target.transform.position - nug.transform.position;
+            Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
+            Instantiate(bombShrimp, nug.transform.position, bulletRotation, gameObject.transform);
+        }
     }
 }
 

@@ -99,6 +99,8 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Cooldown du Mega Boost")]
     public float megaBoostCooldown = 4f;
 
+    public float megaBoostDuration = 3;
+
     #endregion
 
     #endregion
@@ -167,6 +169,8 @@ public class MoveTest : MonoBehaviour
     private bool megaBoostSecurity = false;
 
     private bool touchedByEnemy;
+
+    private bool megaBoostExtend = false;
     
 
     #endregion
@@ -231,11 +235,16 @@ public class MoveTest : MonoBehaviour
 
     private void Update()
     {
-        
+        if(shotsDismissal && isBoosting && megaBoostSecurity && touchedByEnemy && !megaBoostExtend)
+        {
+            megaBoostExtend = true;
+        }
         if(shotsDismissal && isBoosting && !megaBoostSecurity && touchedByEnemy)
         {
             actualBoostSpeed = megaBoostTrailSpeed;
-            Invoke("CooldownSideDash", sideDashCooldown);
+            megaBoostSecurity = true;
+            Invoke("DeactivateOverBoost", megaBoostDuration);
+            // Invoke("CooldownSideDash", sideDashCooldown);
         }
 
         #region Speed Modifiers In Update
@@ -434,8 +443,15 @@ public class MoveTest : MonoBehaviour
 
     public void DeactivateOverBoost()
     {
+        if(megaBoostExtend = true)
+        {
+            Invoke("DeactivateOverBoost", megaBoostDuration);
+            megaBoostExtend = false;
+            return;
+        }
         actualBoostSpeed = boostTrailSpeed;
         megaBoostSecurity = false;
     }
+
 
 }

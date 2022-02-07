@@ -7,11 +7,13 @@ using Cinemachine;
 
 public class EnemyHBox : MonoBehaviour
 {
-    public PlayerStats stats;
-    
+<<<<<<< HEAD
+
     private bool startDestroy = false;
     private GameObject bomb;
-    
+
+    private void OnTriggerEnter(Collider other) 
+=======
     public PlayerStats stats;
 
     void Awake()
@@ -19,7 +21,8 @@ public class EnemyHBox : MonoBehaviour
         stats = GameObject.FindGameObjectWithTag("CharacterParent").GetComponent<PlayerStats>();
     }
 
-    private void OnTriggerEnter(Collider other) 
+   private void OnTriggerEnter(Collider other) 
+>>>>>>> ef82228e4e3c440b4aefa8b3aa55d22306827a83
     {
         if (other.CompareTag("Bullet"))
         {

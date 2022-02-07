@@ -11,8 +11,6 @@ public class EnemyHBox : MonoBehaviour
     
     private bool startDestroy = false;
     private GameObject bomb;
-    
-    public PlayerStats stats;
 
     void Awake()
     {

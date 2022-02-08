@@ -149,7 +149,10 @@ public class Shoot : MonoBehaviour
             if(secondaryShot)
             {
                 secondaryShot = false;
-                SecondaryShot();
+                for(int i = 0; i >= 4 ; i++) 
+                {
+                    SecondaryShot();
+                }
                 ennemyIdx = 0;
                 ennemy[0] = null;
                 ennemy[1] = null;

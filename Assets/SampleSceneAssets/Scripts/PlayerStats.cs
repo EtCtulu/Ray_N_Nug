@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     public float playerBoost = 100;
 
     [Tooltip("Le nombre de bombes que le personnage as a sa disposition, un int")]
-    public int playerBombs = 0;
+    public int playerBombs = 4;
 
     [Header("Ennemis")]
     [Space(10)]
@@ -33,13 +35,116 @@ public class PlayerStats : MonoBehaviour
     public float fourLockBoostGain = 0;
     public float fiveLockBoostGain = 0;
 
+    [Header("GameObject de l'UI")]
+    [Space(10)]
+    public GameObject health1;
+    public GameObject health2;
+    public GameObject health3;
+    public GameObject health4;
+    public GameObject health5;
+    public GameObject health6;
+    [Space(10)]
+    public TextMeshProUGUI textBombe;
+    public TextMeshProUGUI textTimer;
+
     [Header("Movetest")]
     [Space(10)]
     public MoveTest moveTest;
 
+    private float timeValue = 0;
+
+    public void Awake()
+    {
+        
+    }
+    public void Update()
+    {
+        textBombe.text = playerBombs.ToString();
+
+        timeValue += 1 * Time.deltaTime;
+        DisplayTime(timeValue);
+    }
+
+    public void DisplayTime(float timeToDisplay)
+    {
+        float minute = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconde = Mathf.FloorToInt(timeToDisplay % 60);
+        float milliseconde = timeToDisplay % 1 * 1000;
+
+        textTimer.text = string.Format("{0:00}:{1:00}:{2:000}", minute, seconde, milliseconde);
+    }
+
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        UiHealth();
+    }
+
+    public void UiHealth()
+    {
+        if(playerHealth == 6)
+        {
+            health1.SetActive(true);
+            health2.SetActive(true);
+            health3.SetActive(true);
+            health4.SetActive(true);
+            health5.SetActive(true);
+            health6.SetActive(true);
+        }
+        else if(playerHealth == 5)
+        {
+            health1.SetActive(true);
+            health2.SetActive(true);
+            health3.SetActive(true);
+            health4.SetActive(true);
+            health5.SetActive(true);
+            health6.SetActive(false);
+        }
+        else if (playerHealth == 4)
+        {
+            health1.SetActive(true);
+            health2.SetActive(true);
+            health3.SetActive(true);
+            health4.SetActive(true);
+            health5.SetActive(false);
+            health6.SetActive(false);
+        }
+        else if (playerHealth == 3)
+        {
+            health1.SetActive(true);
+            health2.SetActive(true);
+            health3.SetActive(true);
+            health4.SetActive(false);
+            health5.SetActive(false);
+            health6.SetActive(false);
+        }
+        else if (playerHealth == 2)
+        {
+            health1.SetActive(true);
+            health2.SetActive(true);
+            health3.SetActive(false);
+            health4.SetActive(false);
+            health5.SetActive(false);
+            health6.SetActive(false);
+        }
+        else if (playerHealth == 1)
+        {
+            health1.SetActive(true);
+            health2.SetActive(false);
+            health3.SetActive(false);
+            health4.SetActive(false);
+            health5.SetActive(false);
+            health6.SetActive(false);
+        }
+        else if (playerHealth == 0)
+        {
+            health1.SetActive(false);
+            health2.SetActive(false);
+            health3.SetActive(false);
+            health4.SetActive(false);
+            health5.SetActive(false);
+            health6.SetActive(false);
+        }
     }
 
     public void UseBomb()

@@ -30,6 +30,8 @@ public class Shoot : MonoBehaviour
     [Tooltip("Balle")]
     public GameObject bullet;
 
+    public GameObject secondaryBullet;
+
     [Tooltip("Bombe Crevette")]
     public GameObject bombShrimp;
 
@@ -162,7 +164,9 @@ public class Shoot : MonoBehaviour
 
     public void SecondaryShot()
     {
-
+        Vector3 dir = target.transform.position - nug.transform.position;
+        Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
+        Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
     }
 
     public void Bomb(InputAction.CallbackContext context)

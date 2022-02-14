@@ -16,6 +16,12 @@ public class SecondaryBullet : MonoBehaviour
     [HideInInspector]
     public Vector3 velocity = Vector3.forward;
 
+    public GameObject ennemyLocked;
+
+    public int speed;
+
+    public float boostGain;
+
     private void Awake() 
     {
         travelledDistance = 0f;
@@ -23,13 +29,16 @@ public class SecondaryBullet : MonoBehaviour
 
     private void Update() 
     {
-        Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
+        /* Vector3 velMetersPerFrame = velocity * Time.deltaTime * bulletSpeed;
         transform.position += transform.TransformDirection(velMetersPerFrame);
         travelledDistance += (velMetersPerFrame.z * 100) * Time.deltaTime;
         if(travelledDistance > bulletRange)
         {
             Destroy(gameObject);
-        }
+        }*/
+
+        transform.position = Vector3.MoveTowards(transform.position, ennemyLocked.transform.position, speed * Time.deltaTime);
 
     }
+
 }

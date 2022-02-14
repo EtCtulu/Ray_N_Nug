@@ -38,7 +38,7 @@ public class Menus : MonoBehaviour
     {
         if (levelToLoad == 1)
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(1);
         }
         else if (levelToLoad == 2)
         {

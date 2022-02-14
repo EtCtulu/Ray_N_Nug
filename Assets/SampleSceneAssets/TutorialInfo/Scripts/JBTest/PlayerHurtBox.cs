@@ -22,7 +22,6 @@ public class PlayerHurtBox : MonoBehaviour
         {
             Destroy(other.gameObject);
             originalSpeed = player.trailSpeed;
-            Debug.Log("Ouille");
             player.trailSpeed -= 3f;
             player.canControl = false;
             Invoke("Recovery", .2f);

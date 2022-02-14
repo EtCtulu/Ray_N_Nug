@@ -57,9 +57,10 @@ public class PlayerStats : MonoBehaviour
     {
         
     }
+
     public void Update()
     {
-        textBombe.text = playerBombs.ToString();
+        //textBombe.text = playerBombs.ToString();
 
         timeValue += 1 * Time.deltaTime;
         DisplayTime(timeValue);
@@ -72,7 +73,7 @@ public class PlayerStats : MonoBehaviour
         float seconde = Mathf.FloorToInt(timeToDisplay % 60);
         float milliseconde = timeToDisplay % 1 * 1000;
 
-        textTimer.text = string.Format("{0:00}:{1:00}:{2:000}", minute, seconde, milliseconde);
+//        textTimer.text = string.Format("{0:00}:{1:00}:{2:000}", minute, seconde, milliseconde);
     }
 
     public void TakeDamage(int damage)

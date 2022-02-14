@@ -159,6 +159,9 @@ public class MoveTest : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    [HideInInspector]
+    public bool canControl = true;
+
     private bool isBoosting = false;
 
     private bool isSlowing = false;
@@ -301,7 +304,7 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
     {
-        if(canMove)
+        if(canMove && canControl)
         {
             Vector2 rawMoveInput = context.ReadValue<Vector2>();
 
@@ -374,7 +377,7 @@ public class MoveTest : MonoBehaviour
 
     public void Strafe(InputAction.CallbackContext context)
     {
-        if(canMove)
+        if(canMove && canControl)
         {
             if(context.performed && isMoving)
             {
@@ -435,7 +438,7 @@ public class MoveTest : MonoBehaviour
 
     public void BRoll(InputAction.CallbackContext context)
     {
-        if(context.performed && canBRoll && canMove)
+        if(context.performed && canBRoll && canMove && canControl)
         {
             BarrelHBox.SetActive(true);
             canBRoll = false;

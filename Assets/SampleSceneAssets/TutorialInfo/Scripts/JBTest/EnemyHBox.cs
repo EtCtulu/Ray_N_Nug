@@ -12,9 +12,17 @@ public class EnemyHBox : MonoBehaviour
     private bool startDestroy = false;
     private GameObject bomb;
 
+    private MoveTest player;
+
+    private float originalSpeed;
+
+    private bool isRecovering;
+
     void Awake()
     {
         stats = GameObject.FindGameObjectWithTag("CharacterParent").GetComponent<PlayerStats>();
+        player = MoveTest.Instance;
+        isRecovering = false;
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -36,6 +44,14 @@ public class EnemyHBox : MonoBehaviour
             other.GetComponent<ShrimpBomb>().bombSpeed = 0f;
             other.transform.GetChild(0).gameObject.SetActive(true);
         }
+        else if (other.CompareTag("Player"))
+        {
+            originalSpeed = player.trailSpeed;
+            Debug.Log("Ouille");
+            player.trailSpeed -= 3f;
+            player.canMove = false;
+            Invoke("Recovery", .2f);
+        }
     }
 
     private void Update() 
@@ -49,11 +65,22 @@ public class EnemyHBox : MonoBehaviour
             gameObject.GetComponentInParent<Enemy>().gameObject.SetActive(false);
             Invoke("DestroyBomb", 1f);
         }
+
+        if(isRecovering && player.trailSpeed < originalSpeed)
+        {
+            player.trailSpeed += 1.5f * Time.deltaTime * 5;      
+        }
     }
 
     public void DestroyBomb()
     {
         Destroy(bomb);
         startDestroy = false;
+    }
+
+    public void Recovery()
+    {
+        player.canMove = true;
+        isRecovering = true;
     }
 }

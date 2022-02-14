@@ -413,6 +413,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df13acb485718064898c3d2fa0de7c6b, type: 3}
+--- !u!114 &443451238 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1577989596081934157, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
+  m_PrefabInstance: {fileID: 2536164074048013925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b2c6e30a9034e20b8ae945f068002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &443549570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1350,8 @@ MonoBehaviour:
   sideBoostWindowDuration: 0.2
   dashInvicibilityDuration: 1
   sideBoostDuration: 2
-  isMoving: 0
+  canMove: 1
+  canControl: 1
   barrelRollDuration: 1
   barrelRollCD: 0.5
 --- !u!54 &888866193
@@ -1837,6 +1849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 670936892630210996, guid: d24606021cddbc34b92a67a5f99973c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d24606021cddbc34b92a67a5f99973c0, type: 3}
 --- !u!1 &1664441080
@@ -1858,7 +1874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1664441081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1887,7 +1903,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 179368754}
   spawnCD: 0.3
   stoppingTimer: 5.5
-  enemiesToSpawn: 1
+  enemiesToSpawn: 5
   enemiesSpawned: []
 --- !u!23 &1664441083
 MeshRenderer:
@@ -2463,6 +2479,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+    - target: {fileID: 7084869965732888694, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 443451238}
+    - target: {fileID: 7084869965732888694, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
+      propertyPath: secondaryBullet
+      value: 
+      objectReference: {fileID: 2001257396705074006, guid: e98250e3631a740eab2074d839a347a9, type: 3}
     - target: {fileID: 7084869965732888695, guid: 1fd40cdb48a502f468b8248d95b55d1c, type: 3}
       propertyPath: m_Name
       value: CharacterParent

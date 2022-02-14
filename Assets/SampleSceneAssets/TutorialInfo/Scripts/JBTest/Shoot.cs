@@ -181,60 +181,57 @@ public class Shoot : MonoBehaviour
 
     public void SecondaryShot(int idx)
     {
-        float boostGain;
-        Vector3 dir = target.transform.position - nug.transform.position;
-        Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
-        GameObject bullet;
-       switch (ennemyIdx) {
-           case 0:
-               boostGain = stats.singleLockBoostGain;
-               bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-                bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[0];
-               break;
-            case 1: 
-                boostGain = stats.twoLockBoostGain / 2;
-                for(int i = 0; i >= 1 ; i++) {
-                bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-                bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
-                }
-                break;
-            case 2: 
-                boostGain = stats.threeLockBoostGain / 3;
-                for(int i = 0; i >= 2 ; i++) {
-                bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-                bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
-                }
-                break;
-            case 3: 
-                boostGain = stats.fourLockBoostGain / 4;
-                for(int i = 0; i >= 3 ; i++) {
-                bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-                bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
-                }
-                break;
-            case 4: 
-                boostGain = stats.fiveLockBoostGain / 5;
-                for(int i = 0; i >= 4 ; i++) {
-                bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-                bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
-                }
-                break;
-           default :
-               
-               break;
-       }
-
-        /*if(player.canMove)
+        if(player.canMove)
         {
+            float boostGain;
             Vector3 dir = target.transform.position - nug.transform.position;
             Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
-            Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
-        }*/
+            GameObject bullet;
+           switch (ennemyIdx) 
+           {
+                case 0:
+                    boostGain = stats.singleLockBoostGain;
+                    bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+                        bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
+                        bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[0];
+                    break;
+                    case 1: 
+                        boostGain = stats.twoLockBoostGain / 2;
+                        for(int i = 0; i >= 1 ; i++) {
+                        bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+                        bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
+                        bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
+                        }
+                        break;
+                    case 2: 
+                        boostGain = stats.threeLockBoostGain / 3;
+                        for(int i = 0; i >= 2 ; i++) {
+                        bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+                        bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
+                        bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
+                        }
+                        break;
+                    case 3: 
+                        boostGain = stats.fourLockBoostGain / 4;
+                        for(int i = 0; i >= 3 ; i++) {
+                        bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+                        bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
+                        bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
+                        }
+                        break;
+                    case 4: 
+                        boostGain = stats.fiveLockBoostGain / 5;
+                        for(int i = 0; i >= 4 ; i++) {
+                        bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+                        bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
+                        bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
+                        }
+                        break;
+                default :
+                    
+                    break;
+            }
+        }
     }
 
     public void Bomb(InputAction.CallbackContext context)

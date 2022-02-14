@@ -65,6 +65,7 @@ public class PlayerStats : MonoBehaviour
         DisplayTime(timeValue);
     }
 
+    // Transform timeToDisplay en 3 valeurs (minutes, seconde, milliseconde) 
     public void DisplayTime(float timeToDisplay)
     {
         float minute = Mathf.FloorToInt(timeToDisplay / 60);
@@ -80,6 +81,7 @@ public class PlayerStats : MonoBehaviour
         UiHealth();
     }
 
+    //Affiche la vie en fonction de playerealth dans l'UI
     public void UiHealth()
     {
         if(playerHealth == 6)

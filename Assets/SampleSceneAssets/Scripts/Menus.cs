@@ -15,21 +15,43 @@ public class Menus : MonoBehaviour
     public CinemachineVirtualCameraBase camLevel;
     public CinemachineVirtualCameraBase camCredit;
 
+    private int levelToLoad = 1;
+
     public void LoadLevel1()
     {
-        //SceneManager.LoadScene("Level1");
-        Debug.Log("Level 1 !");
+        levelToLoad = 1;
+        Debug.Log("Load level 1 ");
     }
 
     public void LoadLevel2()
     {
-        //SceneManager.LoadScene("Level2");
-        Debug.Log("Level 2 !");
+        levelToLoad = 2;
+        Debug.Log("Load level 2 !");
     }
     public void LoadLevel3()
     {
-        //SceneManager.LoadScene("Level3");
-        Debug.Log("Level 3 !");
+        levelToLoad = 3;
+        Debug.Log("Load level 3 !");
+    }
+
+    public void LaunchLevel()
+    {
+        if (levelToLoad == 1)
+        {
+            SceneManager.LoadScene("Level1");
+        }
+        else if (levelToLoad == 2)
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        else if (levelToLoad == 3)
+        {
+            SceneManager.LoadScene("Level3");
+        }
+        else
+        {
+            Debug.Log("Failed to load");
+        }
     }
 
     public void QuitGame()

@@ -156,6 +156,9 @@ public class MoveTest : MonoBehaviour
 
     private bool isMoving = false;
 
+
+    public bool canMove = true;
+
     private bool isBoosting = false;
 
     private bool isSlowing = false;
@@ -298,16 +301,19 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
     {
-        Vector2 rawMoveInput = context.ReadValue<Vector2>();
-
-        rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
-        
-        rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
-
-        isMoving = true;
-        if(context.canceled)
+        if(canMove)
         {
-            isMoving = false;
+            Vector2 rawMoveInput = context.ReadValue<Vector2>();
+
+            rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
+            
+            rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
+
+            isMoving = true;
+            if(context.canceled)
+            {
+                isMoving = false;
+            }
         }
 
         //rbCharacterTransform.localRotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f), .1f);

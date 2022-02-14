@@ -46,6 +46,8 @@ public class Shoot : MonoBehaviour
 
     private int ennemyIdx = 0;
 
+    private MoveTest player;
+
     public GameObject[] ennemy = new GameObject[5];
 
     private bool secondaryShot;
@@ -57,6 +59,7 @@ public class Shoot : MonoBehaviour
 
     private void Awake() 
     {
+        player = MoveTest.Instance;
         ray = transform.GetChild(0).gameObject;
         nug = ray.transform.GetChild(6).gameObject;
         target = ray.transform.GetChild(0).gameObject;
@@ -64,106 +67,115 @@ public class Shoot : MonoBehaviour
 
     private void Update()
     {
-
-        if(activateSecondaryTimer && !secondaryShot)
+        if(player.canMove)
         {
-            secondaryTimer += Time.deltaTime; 
-        }
 
-        if(secondaryTimer >= timeBeforeSecondaryShot && !secondaryShot)
-        {
-            secondaryShot = true;
-        }
+            if(activateSecondaryTimer && !secondaryShot)
+            {
+                secondaryTimer += Time.deltaTime; 
+            }
 
-        #region Raycast For Secondaryshot
+            if(secondaryTimer >= timeBeforeSecondaryShot && !secondaryShot)
+            {
+                secondaryShot = true;
+            }
 
-        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.green);
+            #region Raycast For Secondaryshot
 
-        if(secondaryShot){
+            Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.green);
 
-        secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.red);
+            if(secondaryShot){
 
-        RaycastHit Hit;
-        if( Physics.Raycast(characterModel.transform.position, secondaryShotAim, out Hit, range) && secondaryShot && Hit.transform.tag == "Enemy")
-        {
-            
-                            Debug.Log("Touché en secondaire");
-                           switch (ennemyIdx) {
-                               case 0 :
-                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
-                                   {
-                                       ennemy[0] = Hit.collider.gameObject;
-                                       ennemyIdx++;
-                                   }
-                                   break;
-                                case 1 :
-                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
-                                   {
-                                       ennemy[1] = Hit.collider.gameObject;
-                                       ennemyIdx++;
-                                   }
-                                   break;
-                                case 2 :
-                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
-                                   {
-                                       ennemy[2] = Hit.collider.gameObject;
-                                       ennemyIdx++;
-                                   }
-                                   break;
-                                case 3 :
-                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
-                                   {
-                                       ennemy[3] = Hit.collider.gameObject;
-                                       ennemyIdx++;
-                                   }
-                                   break;
-                                case 4 :
-                                   if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
-                                   {
-                                       ennemy[4] = Hit.collider.gameObject;
-                                       ennemyIdx++;
-                                   }
-                                   break;
-                               default :
-                                   
-                                   break;
-                           }
-                        
-        }
-        #endregion
+            secondaryShotAim = characterModel.transform.TransformDirection(Vector3.forward);
+            Debug.DrawRay(characterModel.transform.position, secondaryShotAim * 10000, Color.red);
+
+            RaycastHit Hit;
+            if( Physics.Raycast(characterModel.transform.position, secondaryShotAim, out Hit, range) && secondaryShot && Hit.transform.tag == "Enemy")
+            {
+                
+                                Debug.Log("Touché en secondaire");
+                            switch (ennemyIdx) {
+                                case 0 :
+                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                    {
+                                        ennemy[0] = Hit.collider.gameObject;
+                                        ennemyIdx++;
+                                    }
+                                    break;
+                                    case 1 :
+                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                    {
+                                        ennemy[1] = Hit.collider.gameObject;
+                                        ennemyIdx++;
+                                    }
+                                    break;
+                                    case 2 :
+                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                    {
+                                        ennemy[2] = Hit.collider.gameObject;
+                                        ennemyIdx++;
+                                    }
+                                    break;
+                                    case 3 :
+                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                    {
+                                        ennemy[3] = Hit.collider.gameObject;
+                                        ennemyIdx++;
+                                    }
+                                    break;
+                                    case 4 :
+                                    if(Hit.collider.gameObject != ennemy[0] && Hit.collider.gameObject != ennemy[1] && Hit.collider.gameObject != ennemy[2] && Hit.collider.gameObject != ennemy[3] && Hit.collider.gameObject != ennemy[4])
+                                    {
+                                        ennemy[4] = Hit.collider.gameObject;
+                                        ennemyIdx++;
+                                    }
+                                    break;
+                                default :
+                                    
+                                    break;
+                            }
+                            
+            }
+            #endregion
+            }
         }
     }
 
     public void Shooting(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(player.canMove)
         {
-            Vector3 dir = target.transform.position - nug.transform.position;
-            Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
-            Instantiate(bullet, nug.transform.position, bulletRotation, gameObject.transform);
-            activateSecondaryTimer = true;
-        }
-        if(context.canceled)
-        {
-            activateSecondaryTimer = false;
-            secondaryTimer = 0f;
-            if(secondaryShot)
+            if(context.performed)
             {
-                secondaryShot = false;
-                for(int i = 0; i >= 4 ; i++) 
+                Vector3 dir = target.transform.position - nug.transform.position;
+                Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
+                Instantiate(bullet, nug.transform.position, bulletRotation, gameObject.transform);
+                activateSecondaryTimer = true;
+            }
+            if(context.canceled)
+            {
+                activateSecondaryTimer = false;
+                secondaryTimer = 0f;
+                if(secondaryShot)
                 {
-                    SecondaryShot(i);
+
+                    SecondaryShot(ennemyIdx);
+
+                    secondaryShot = false;
+                    /*for(int i = 0; i >= 4 ; i++) 
+                    {
+                        SecondaryShot();
+                    }*/
+                    ennemyIdx = 0;
+                    ennemy[0] = null;
+                    ennemy[1] = null;
+                    ennemy[2] = null;
+                    ennemy[3] = null;
+                    ennemy[4] = null;
+
                 }
-                ennemyIdx = 0;
-                ennemy[0] = null;
-                ennemy[1] = null;
-                ennemy[2] = null;
-                ennemy[3] = null;
-                ennemy[4] = null;
 
             }
-
         }
     }
 
@@ -178,7 +190,7 @@ public class Shoot : MonoBehaviour
                boostGain = stats.singleLockBoostGain;
                bullet = Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
                 bullet.GetComponent<SecondaryBullet>().boostGain = boostGain;
-                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[i];
+                bullet.GetComponent<SecondaryBullet>().ennemyLocked = ennemy[0];
                break;
             case 1: 
                 boostGain = stats.twoLockBoostGain / 2;
@@ -216,11 +228,18 @@ public class Shoot : MonoBehaviour
                
                break;
        }
+
+        /*if(player.canMove)
+        {
+            Vector3 dir = target.transform.position - nug.transform.position;
+            Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
+            Instantiate(secondaryBullet, nug.transform.position, bulletRotation, gameObject.transform);
+        }*/
     }
 
     public void Bomb(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && player.canMove)
         {
             Vector3 dir = target.transform.position - nug.transform.position;
             Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));

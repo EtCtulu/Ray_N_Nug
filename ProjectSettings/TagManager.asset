@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - Bomb
   - Obstacle
+  - TeleportSandbox
   layers:
   - Default
   - TransparentFX

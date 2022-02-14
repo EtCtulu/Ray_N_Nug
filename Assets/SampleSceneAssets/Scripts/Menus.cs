@@ -17,6 +17,12 @@ public class Menus : MonoBehaviour
 
     private int levelToLoad = 1;
 
+    public void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void LoadLevel1()
     {
         levelToLoad = 1;

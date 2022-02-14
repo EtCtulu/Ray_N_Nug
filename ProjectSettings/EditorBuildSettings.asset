@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jorris Menu.unity
     guid: a2187c37aa36f6b47a510bb4bd42cfdd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Jorris UI.unity
     guid: 79c06a448a3be5a47a6c1605c5fe56cd
+  - enabled: 1
+    path: Assets/Scenes/Test_Scene_Joseph.unity
+    guid: 5c657ca55a2a8e445b7de7d8960d4003
+  - enabled: 1
+    path: Assets/Scenes/Test_Scene_Q.unity
+    guid: e4ca596f2e0ea7047b08c13f74c3d3b7
   m_configObjects: {}

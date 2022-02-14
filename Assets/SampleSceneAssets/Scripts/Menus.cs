@@ -42,7 +42,7 @@ public class Menus : MonoBehaviour
         }
         else if (levelToLoad == 2)
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene(2);
         }
         else if (levelToLoad == 3)
         {

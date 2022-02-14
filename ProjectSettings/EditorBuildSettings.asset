@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Test_Scene_Jorris.unity
+    path: Assets/Scenes/Jorris Menu.unity
     guid: a2187c37aa36f6b47a510bb4bd42cfdd
+  - enabled: 1
+    path: Assets/Scenes/Jorris UI.unity
+    guid: 79c06a448a3be5a47a6c1605c5fe56cd
   m_configObjects: {}

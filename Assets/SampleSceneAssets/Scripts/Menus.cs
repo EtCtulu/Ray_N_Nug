@@ -25,19 +25,22 @@ public class Menus : MonoBehaviour
 
     public void LoadLevel1()
     {
-        levelToLoad = 1;
-        Debug.Log("Load level 1 ");
+        SceneManager.LoadScene(1);
+        /*levelToLoad = 1;
+        Debug.Log("Load level 1 ");*/
     }
 
     public void LoadLevel2()
     {
-        levelToLoad = 2;
-        Debug.Log("Load level 2 !");
+        SceneManager.LoadScene(1);
+        /*levelToLoad = 2;
+        Debug.Log("Load level 2 !");*/
     }
     public void LoadLevel3()
     {
-        levelToLoad = 3;
-        Debug.Log("Load level 3 !");
+        SceneManager.LoadScene(1);
+        /*levelToLoad = 3;
+        Debug.Log("Load level 3 !");*/
     }
 
     public void LaunchLevel()

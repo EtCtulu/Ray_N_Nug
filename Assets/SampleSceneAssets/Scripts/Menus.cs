@@ -32,13 +32,13 @@ public class Menus : MonoBehaviour
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
         /*levelToLoad = 2;
         Debug.Log("Load level 2 !");*/
     }
     public void LoadLevel3()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
         /*levelToLoad = 3;
         Debug.Log("Load level 3 !");*/
     }

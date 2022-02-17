@@ -1,0 +1,33 @@
+{
+    "name": "ReturnDiorama",
+    "maps": [
+        {
+            "name": "return",
+            "id": "88a498bf-850b-4702-b366-26415ef112d3",
+            "actions": [
+                {
+                    "name": "Return scene 1",
+                    "type": "Button",
+                    "id": "f31d2cec-5730-4373-b5e7-7d0c0299eb55",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0a36ca24-e154-4123-88cd-65fddcb8c7f8",
+                    "path": "<Keyboard>/p",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return scene 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

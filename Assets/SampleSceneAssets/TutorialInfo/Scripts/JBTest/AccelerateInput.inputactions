@@ -44,6 +44,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "BarrelRoll",
+                    "type": "Button",
+                    "id": "e41edfd7-d784-46ba-8463-ccade2e8bb76",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "BombeCrevette",
+                    "type": "Button",
+                    "id": "9bbdbb1f-1b92-4f36-8531-9d7c42d31869",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -105,7 +121,7 @@
                 {
                     "name": "",
                     "id": "c4f0e4a5-f435-43bf-89f2-89e9a83b78eb",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -115,19 +131,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4f6b2a64-5736-4832-b3ad-25911b9ec5ac",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SlowDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "44fb97eb-4ae4-4677-9827-36e92ff3a5b1",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -137,8 +142,52 @@
                 },
                 {
                     "name": "",
-                    "id": "782f80fd-56a7-418e-8b05-cf6c0f18c58b",
+                    "id": "35e22942-0c53-4b0b-84a7-50b96307d664",
                     "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BarrelRoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0130e09-f228-4b21-9354-d464c9cf392f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BarrelRoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5585d54-8295-4482-9cbe-8e229b61a450",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BombeCrevette",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfda4290-973b-4bac-b8a7-248d35830d7e",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Strafe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "949198d1-743f-494d-b0fc-868e1b7a70aa",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

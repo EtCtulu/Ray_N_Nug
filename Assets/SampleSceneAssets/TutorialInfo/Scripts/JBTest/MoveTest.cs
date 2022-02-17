@@ -99,6 +99,8 @@ public class MoveTest : MonoBehaviour
     [Tooltip("Cooldown du Mega Boost")]
     public float megaBoostCooldown = 4f;
 
+    public float megaBoostDuration = 3;
+
     #endregion
 
     #endregion
@@ -154,6 +156,12 @@ public class MoveTest : MonoBehaviour
 
     private bool isMoving = false;
 
+    [HideInInspector]
+    public bool canMove = true;
+
+    [HideInInspector]
+    public bool canControl = true;
+
     private bool isBoosting = false;
 
     private bool isSlowing = false;
@@ -167,6 +175,8 @@ public class MoveTest : MonoBehaviour
     private bool megaBoostSecurity = false;
 
     private bool touchedByEnemy;
+
+    private bool megaBoostExtend = false;
     
 
     #endregion
@@ -183,8 +193,24 @@ public class MoveTest : MonoBehaviour
 
     #endregion
 
-    //private Vector3 currentEulerAngles;
-    //private Quaternion currentRotation; 
+    #region Barrel Roll Variables
+
+    private GameObject BarrelHBox;
+
+    private bool canBRoll = true;
+
+    [Header("Tonneau")]
+    [Range(0,3)]
+    [Tooltip("La durée pendant laquelle le joueur effectue son tonneau")]
+    public float barrelRollDuration = 1f;
+
+    [Range(0,3)]
+    [Tooltip("La durée pendant laquelle le joueur ne peut plus effectuer de tonneaux")]
+    public float barrelRollCD = 0.5f;
+
+    #endregion
+
+
     
     #region Awake
     public static MoveTest Instance;
@@ -205,6 +231,7 @@ public class MoveTest : MonoBehaviour
 
         aInput = new AccelerateInput();
         rbCharacter = transform.GetChild(0).GetComponent<Rigidbody>();
+        BarrelHBox = rbCharacter.transform.GetChild(1).gameObject;
         rbCharacterTransform = rbCharacter.transform;
         actualBoostSpeed = boostTrailSpeed;
 
@@ -214,11 +241,16 @@ public class MoveTest : MonoBehaviour
 
     private void Update()
     {
-        
+        if(shotsDismissal && isBoosting && megaBoostSecurity && touchedByEnemy && !megaBoostExtend)
+        {
+            megaBoostExtend = true;
+        }
         if(shotsDismissal && isBoosting && !megaBoostSecurity && touchedByEnemy)
         {
             actualBoostSpeed = megaBoostTrailSpeed;
-            Invoke("CooldownSideDash", sideDashCooldown);
+            megaBoostSecurity = true;
+            Invoke("DeactivateOverBoost", megaBoostDuration);
+            // Invoke("CooldownSideDash", sideDashCooldown);
         }
 
         #region Speed Modifiers In Update
@@ -272,11 +304,20 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a donner le mouvement en X et Y de ray
     public void Move(InputAction.CallbackContext context)
     {
-        Vector2 rawMoveInput = context.ReadValue<Vector2>();
+        if(canMove && canControl)
+        {
+            Vector2 rawMoveInput = context.ReadValue<Vector2>();
 
-        rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
-        
-        rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
+            rbCharacter.velocity = transform.TransformDirection(rawMoveInput * strafeSpeed);
+            
+            rbCharacterTransform.localRotation = Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f);
+
+            isMoving = true;
+            if(context.canceled)
+            {
+                isMoving = false;
+            }
+        }
 
         //rbCharacterTransform.localRotation = Quaternion.Slerp(rbCharacterTransform.localRotation, Quaternion.Euler(-rawMoveInput.y * rotationAngle, rawMoveInput.x * rotationAngle, 0f), .1f);
     }
@@ -288,21 +329,26 @@ public class MoveTest : MonoBehaviour
     // Fonction qui sert a augmenter la vitesse sur l'axe Z
     public void Accelerate(InputAction.CallbackContext context)
     {
-        Debug.Log("Ohlala on va vite");
-        if(context.performed && !isBoosting)
+        if(canMove)
         {
-            isBoosting = true;
-        }
-        else if(context.canceled && isBoosting)
-        {
-            Debug.Log("Retour a la normale");
-            time = 0;
-            isBoosting = false;
-            isSlowing = true;            
-            // playerParent.m_Speed = trailSpeed;
+            Debug.Log("Ohlala on va vite");
+            if(context.performed && !isBoosting)
+            {
+                isBoosting = true;
+            }
+            else if(context.canceled && isBoosting)
+            {
+                Debug.Log("Retour a la normale");
+                time = 0;
+                isBoosting = false;
+                isSlowing = true;            
+                // playerParent.m_Speed = trailSpeed;
+            }
         }
     }
 
+    //Ancienne fonction de décélération
+    /*
     // Fonction qui sert a baisser la vitesse sur l'axe Z
     public void SlowDown(InputAction.CallbackContext context)
     {
@@ -323,6 +369,7 @@ public class MoveTest : MonoBehaviour
         }
         }
     }
+    */
 
     #endregion
 
@@ -330,28 +377,32 @@ public class MoveTest : MonoBehaviour
 
     public void Strafe(InputAction.CallbackContext context)
     {
-        if(context.performed){
-        if(sideSecurity)
+        if(canMove && canControl)
         {
-            Debug.Log("Non");
-            return;
-        }
-        if(canSideDash)
-        {
-            Debug.Log("SideDASH SPEEEEED");
-            strafeSpeed = strafeSpeed * strafeSpeedMultiply;
-            sideSecurity = true;
-            Invoke("ResetSpeed", sideBoostDuration);
-            return;
-        }
-        Debug.Log("Initial Strafe");
-        isInvicible = true;
-        shotsDismissal = true;
-        canSideDash = true;
-        Invoke("DeactivateDismissal", dismissalDuration);
-        Invoke("DeactivateSideDash", sideBoostWindowDuration);
-        Invoke("DeactivateInvicible", dashInvicibilityDuration);
-        Invoke("CooldownSideDash", sideDashCooldown);
+            if(context.performed && isMoving)
+            {
+                if(sideSecurity)
+                {
+                    Debug.Log("Non");
+                    return;
+                }
+                if(canSideDash)
+                {
+                    Debug.Log("SideDASH SPEEEEED");
+                    strafeSpeed = strafeSpeed * strafeSpeedMultiply;
+                    sideSecurity = true;
+                    Invoke("ResetSpeed", sideBoostDuration);
+                    return;
+                }
+                Debug.Log("Initial Strafe");
+                isInvicible = true;
+                shotsDismissal = true;
+                canSideDash = true;
+                Invoke("DeactivateDismissal", dismissalDuration);
+                Invoke("DeactivateSideDash", sideBoostWindowDuration);
+                Invoke("DeactivateInvicible", dashInvicibilityDuration);
+                Invoke("CooldownSideDash", sideDashCooldown);
+            }
         }
     }
 
@@ -383,10 +434,42 @@ public class MoveTest : MonoBehaviour
 
     #endregion
 
+    #region Barrel Roll
+
+    public void BRoll(InputAction.CallbackContext context)
+    {
+        if(context.performed && canBRoll && canMove && canControl)
+        {
+            BarrelHBox.SetActive(true);
+            canBRoll = false;
+            Invoke("EndBRoll", 1f);
+            Invoke("CooldownBarrelRoll", barrelRollCD);
+        }
+    }
+
+    public void EndBRoll()
+    {
+        BarrelHBox.SetActive(false);
+    }
+
+    public void CooldownBarrelRoll()
+    {
+        canBRoll = true;
+    }
+
+    #endregion
+
     public void DeactivateOverBoost()
     {
+        if(megaBoostExtend)
+        {
+            Invoke("DeactivateOverBoost", megaBoostDuration);
+            megaBoostExtend = false;
+            return;
+        }
         actualBoostSpeed = boostTrailSpeed;
         megaBoostSecurity = false;
     }
+
 
 }

@@ -209,8 +209,6 @@ public class MoveTest : MonoBehaviour
     public float barrelRollCD = 0.5f;
 
     #endregion
-
-
     
     #region Awake
     public static MoveTest Instance;

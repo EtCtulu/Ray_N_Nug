@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class Shoot : MonoBehaviour
 {
@@ -56,6 +57,28 @@ public class Shoot : MonoBehaviour
 
     #endregion
 
+    #region Bombe Crevette
+
+    [Header("Bombe Crevette")]
+    [Tooltip("Nombre maximum de bombes transportables")]
+    public int maxBombs = 5;
+
+    [Tooltip("Temps en secondes pendant lequel le joueur ne peux plus utiliser de bombes après en avoir tiré une")]
+    public float bombCD = 3f;
+
+    [Tooltip("Ralentissement causé par l'utilisation de la bombe (m/s)")]
+    public float slowBomb = 1f;
+
+    [Tooltip("Temps en secondes avant de récupérer la vitesse de base après l'utilisation d'une bombe")]
+    public float slowRC = .1f;
+
+    [HideInInspector]
+    public int nbBombs;                 //Nombre de bombes que le joueur transporte actuellement
+
+    private bool canBomb;               //Booléen permettant de controller le cooldown de la bombe
+
+    #endregion
+
 
     private void Awake() 
     {
@@ -63,6 +86,8 @@ public class Shoot : MonoBehaviour
         ray = transform.GetChild(0).gameObject;
         nug = ray.transform.GetChild(6).gameObject;
         target = ray.transform.GetChild(0).gameObject;
+        nbBombs = maxBombs;
+        canBomb = true;
     }
 
     private void Update()
@@ -236,12 +261,27 @@ public class Shoot : MonoBehaviour
 
     public void Bomb(InputAction.CallbackContext context)
     {
-        if(context.performed && player.canMove)
+        if(context.performed && player.canMove && nbBombs > 0 && canBomb)
         {
             Vector3 dir = target.transform.position - nug.transform.position;
             Quaternion bulletRotation = Quaternion.LookRotation(dir, nug.transform.InverseTransformDirection(nug.transform.up));
             Instantiate(bombShrimp, nug.transform.position, bulletRotation, gameObject.transform);
+            nbBombs --;
+            canBomb = false;
+            player.GetComponent<CinemachineDollyCart>().m_Speed -= slowBomb;
+            Invoke("SlowRecovery", slowRC);
+            Invoke("BombCD", bombCD);
         }
+    }
+
+    public void BombCD()
+    {
+        canBomb = true;
+    }
+
+    public void SlowRecovery()
+    {
+        player.GetComponent<CinemachineDollyCart>().m_Speed += slowBomb;
     }
 }
 
